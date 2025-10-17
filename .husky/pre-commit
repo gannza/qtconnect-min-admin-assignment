@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running pre-commit checks..."
+
+# Check if we're in a git repository
+if [ ! -d ".git" ]; then
+  echo "Error: Not in a git repository"
+  exit 1
+fi
+
+# Check if backend directory exists
+if [ ! -d "backend" ]; then
+  echo "Error: Backend directory not found"
+  exit 1
+fi
+
+# Change to backend directory
+cd backend
+
+# Run linting on staged files
+echo "Running ESLint on staged files..."
+npx lint-staged
+
+echo "Pre-commit checks passed!"
