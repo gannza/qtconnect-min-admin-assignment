@@ -40,19 +40,26 @@ check_directory() {
   
   echo "Staged files in $dir_name: $staged_files"
   
-  # Run ESLint on staged files if eslint is available
+  # Run ESLint on staged files if eslint is available and Node.js version is compatible
   if [ -f "node_modules/.bin/eslint" ]; then
-    echo "Running ESLint for $dir_name..."
-    for file in $staged_files; do
-      if [ -f "$file" ]; then
-        echo "Linting $file..."
-        ./node_modules/.bin/eslint "$file" || {
-          echo "ESLint failed for $file"
-          cd ..
-          exit 1
-        }
-      fi
-    done
+    # Check Node.js version compatibility (requires Node.js v16+)
+    node_version=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
+    if [ "$node_version" -ge 16 ]; then
+      echo "Running ESLint for $dir_name..."
+      for file in $staged_files; do
+        if [ -f "$file" ]; then
+          echo "Linting $file..."
+          ./node_modules/.bin/eslint "$file" || {
+            echo "ESLint failed for $file"
+            cd ..
+            exit 1
+          }
+        fi
+      done
+    else
+      echo "ESLint requires Node.js v16+ (current: $(node -v)), skipping ESLint..."
+      echo "Please upgrade to Node.js v24.3.0 for full functionality"
+    fi
   else
     echo "ESLint not found in $dir_name, skipping..."
   fi
