@@ -18,8 +18,12 @@ fi
 # Change to backend directory
 cd backend
 
-# Run linting on staged files
-echo "Running ESLint on staged files..."
+# Run linting and type checking on staged files
+echo "Running ESLint and TypeScript type checking on staged files..."
 npx lint-staged
+
+# Run full type check as backup
+echo "Running full TypeScript type check..."
+npm run typecheck
 
 echo "Pre-commit checks passed!"
