@@ -14,8 +14,7 @@
     "seed": "knex seed:run",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "typecheck": "tsc --noEmit",
-    "typecheck:watch": "tsc --noEmit --watch",
+    "typecheck": "eslint src/ --ext .js --config .eslintrc.typecheck.js",
     "docs": "jsdoc -c .jsdocrc.json"
   },
   "engines": {
@@ -52,13 +51,9 @@
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^39.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.10",
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0",
-    "@types/jest": "^29.0.0",
-    "@types/express": "^4.17.0",
-    "ts-node": "^10.0.0",
     "jsdoc": "^4.0.0"
   },
   "lint-staged": {

@@ -5,11 +5,23 @@ module.exports = {
     jest: true
   },
   extends: [
-    'airbnb-base'
+    'airbnb-base',
+    'plugin:jsdoc/recommended'
   ],
+  plugins: ['jsdoc'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
+  },
+  settings: {
+    jsdoc: {
+      mode: 'typescript',
+      tagNamePreference: {
+        param: 'param',
+        returns: 'returns',
+        augments: 'extends'
+      }
+    }
   },
   rules: {
     'no-console': 'off',
@@ -26,13 +38,34 @@ module.exports = {
     'space-before-function-paren': ['error', 'never'],
     'no-underscore-dangle': 'off',
     'consistent-return': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    // JSDoc rules
+    'jsdoc/require-jsdoc': ['error', {
+      require: {
+        FunctionDeclaration: true,
+        MethodDefinition: true,
+        ClassDeclaration: true,
+        ArrowFunctionExpression: true,
+        FunctionExpression: true
+      }
+    }],
+    'jsdoc/require-param': 'error',
+    'jsdoc/require-param-description': 'error',
+    'jsdoc/require-param-type': 'error',
+    'jsdoc/require-returns': 'error',
+    'jsdoc/require-returns-description': 'error',
+    'jsdoc/require-returns-type': 'error',
+    'jsdoc/check-param-names': 'error',
+    'jsdoc/check-tag-names': 'error',
+    'jsdoc/check-types': 'error',
+    'jsdoc/valid-types': 'error'
   },
   overrides: [
     {
       files: ['**/*.test.js', '**/*.spec.js'],
       rules: {
-        'no-unused-expressions': 'off'
+        'no-unused-expressions': 'off',
+        'jsdoc/require-jsdoc': 'off'
       }
     }
   ]
