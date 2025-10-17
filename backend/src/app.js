@@ -1,3 +1,2 @@
 
-var ex=1
-console.log(ex)
+var ex=null
