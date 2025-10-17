@@ -29,14 +29,42 @@ check_directory() {
     return 0
   fi
   
-  # Run lint-staged for staged files in this directory
-  echo "Running lint-staged for $dir_name..."
-  npx lint-staged
+  # Get staged JavaScript files for this directory
+  local staged_files=$(git diff --cached --name-only --diff-filter=ACMR | grep "^$dir/" | grep "\.js$" | sed "s|^$dir/||")
+  
+  if [ -z "$staged_files" ]; then
+    echo "No staged JavaScript files found for $dir_name, skipping..."
+    cd ..
+    return 0
+  fi
+  
+  echo "Staged files in $dir_name: $staged_files"
+  
+  # Run ESLint on staged files if eslint is available
+  if [ -f "node_modules/.bin/eslint" ]; then
+    echo "Running ESLint for $dir_name..."
+    for file in $staged_files; do
+      if [ -f "$file" ]; then
+        echo "Linting $file..."
+        ./node_modules/.bin/eslint "$file" || {
+          echo "ESLint failed for $file"
+          cd ..
+          exit 1
+        }
+      fi
+    done
+  else
+    echo "ESLint not found in $dir_name, skipping..."
+  fi
   
   # Run type checking if available
   if npm run typecheck >/dev/null 2>&1; then
     echo "Running type checking for $dir_name..."
-    npm run typecheck
+    npm run typecheck || {
+      echo "Type checking failed for $dir_name"
+      cd ..
+      exit 1
+    }
   else
     echo "No type checking script found for $dir_name, skipping..."
   fi

@@ -1,0 +1,16 @@
+{
+  "name": "qtconnect-assignments",
+  "version": "1.0.0",
+  "description": "Admin panel with backend and frontend",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
