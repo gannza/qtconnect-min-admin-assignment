@@ -1,0 +1,13 @@
+{
+  "name": "QtConnect-admin-backend",
+  "version": "1.0.0",
+  "description": "Node.js backend with SOLID principles, validation, security, and monitoring",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+   "author": "GANZA Jean Respice",
+  "license": "MIT",
+  "type": "commonjs"
+}
