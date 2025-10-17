@@ -1,0 +1,160 @@
+const User = require('../models/User');
+
+class UserRepository {
+  /**
+   * Find a user by email
+   * @param {string} email - User's email address
+   * @returns {Promise<User|null>} User instance or null if not found
+   */
+  static async findByEmail(email) {
+    return User.query().where('email', email).first();
+  }
+
+  /**
+   * Find all active users
+   * @returns {Promise<User[]>} Array of active users
+   */
+  static async findActiveUsers() {
+    return User.query().where('status', 'active');
+  }
+
+  /**
+   * Find users by role
+   * @param {string} role - User role ('admin' or 'user')
+   * @returns {Promise<User[]>} Array of users with specified role
+   */
+  static async findUsersByRole(role) {
+    return User.query().where('role', role);
+  }
+
+  /**
+   * Get users created in the last N days
+   * @param {number} days - Number of days to look back (default: 7)
+   * @returns {Promise<User[]>} Array of recently created users
+   */
+  static async getUsersCreatedInLastDays(days = 7) {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+    
+    return User.query()
+      .where('created_at', '>=', startDate)
+      .orderBy('created_at', 'desc');
+  }
+
+  /**
+   * Get user statistics
+   * @returns {Promise<Object>} Object containing user statistics
+   */
+  static async getUserStats() {
+    const totalUsers = await User.query().resultSize();
+    const activeUsers = await User.query().where('status', 'active').resultSize();
+    const adminUsers = await User.query().where('role', 'admin').resultSize();
+    
+    return {
+      total: totalUsers,
+      active: activeUsers,
+      inactive: totalUsers - activeUsers,
+      admins: adminUsers,
+      regular: totalUsers - adminUsers
+    };
+  }
+
+  /**
+   * Create a new user
+   * @param {Object} userData - User data to create
+   * @returns {Promise<User>} Created user instance
+   */
+  static async create(userData) {
+    return User.query().insert(userData);
+  }
+
+  /**
+   * Find a user by ID
+   * @param {number} id - User ID
+   * @returns {Promise<User|null>} User instance or null if not found
+   */
+  static async findById(id) {
+    return User.query().findById(id);
+  }
+
+  /**
+   * Update a user by ID
+   * @param {number} id - User ID
+   * @param {Object} updateData - Data to update
+   * @returns {Promise<User>} Updated user instance
+   */
+  static async updateById(id, updateData) {
+    return User.query().patchAndFetchById(id, updateData);
+  }
+
+  /**
+   * Delete a user by ID
+   * @param {number} id - User ID
+   * @returns {Promise<number>} Number of deleted rows
+   */
+  static async deleteById(id) {
+    return User.query().deleteById(id);
+  }
+
+  /**
+   * Get all users with pagination
+   * @param {Object} options - Pagination options
+   * @param {number} options.page - Page number (default: 1)
+   * @param {number} options.limit - Items per page (default: 10)
+   * @returns {Promise<Object>} Object containing users and pagination info
+   */
+  static async findAllWithPagination(options = {}) {
+    const { page = 1, limit = 10 } = options;
+    const offset = (page - 1) * limit;
+
+    const [users, totalCount] = await Promise.all([
+      User.query()
+        .orderBy('created_at', 'desc')
+        .limit(limit)
+        .offset(offset),
+      User.query().resultSize()
+    ]);
+
+    return {
+      users,
+      pagination: {
+        page,
+        limit,
+        total: totalCount,
+        pages: Math.ceil(totalCount / limit)
+      }
+    };
+  }
+
+  /**
+   * Check if a user exists by email
+   * @param {string} email - User's email address
+   * @returns {Promise<boolean>} True if user exists, false otherwise
+   */
+  static async existsByEmail(email) {
+    const user = await this.findByEmail(email);
+    return user !== null;
+  }
+
+  /**
+   * Update user status
+   * @param {number} id - User ID
+   * @param {string} status - New status ('active' or 'inactive')
+   * @returns {Promise<User>} Updated user instance
+   */
+  static async updateStatus(id, status) {
+    return User.query().patchAndFetchById(id, { status });
+  }
+
+  /**
+   * Update user role
+   * @param {number} id - User ID
+   * @param {string} role - New role ('admin' or 'user')
+   * @returns {Promise<User>} Updated user instance
+   */
+  static async updateRole(id, role) {
+    return User.query().patchAndFetchById(id, { role });
+  }
+}
+
+module.exports = UserRepository;
