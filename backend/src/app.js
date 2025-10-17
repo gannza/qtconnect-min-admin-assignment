@@ -1,2 +1,2 @@
 
-var ex=null
+const ex=null
