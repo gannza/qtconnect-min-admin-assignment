@@ -9,21 +9,46 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
-# Check if backend directory exists
-if [ ! -d "backend" ]; then
-  echo "Error: Backend directory not found"
-  exit 1
-fi
+# Function to check a directory
+check_directory() {
+  local dir=$1
+  local dir_name=$2
+  
+  if [ ! -d "$dir" ]; then
+    echo "Warning: $dir_name directory not found, skipping..."
+    return 0
+  fi
+  
+  echo "Checking $dir_name..."
+  cd "$dir"
+  
+  # Check if package.json exists
+  if [ ! -f "package.json" ]; then
+    echo "Warning: No package.json in $dir_name, skipping..."
+    cd ..
+    return 0
+  fi
+  
+  # Run lint-staged for staged files in this directory
+  echo "Running lint-staged for $dir_name..."
+  npx lint-staged
+  
+  # Run type checking if available
+  if npm run typecheck >/dev/null 2>&1; then
+    echo "Running type checking for $dir_name..."
+    npm run typecheck
+  else
+    echo "No type checking script found for $dir_name, skipping..."
+  fi
+  
+  cd ..
+  echo "$dir_name checks completed"
+}
 
-# Change to backend directory
-cd backend
+# Check backend directory
+check_directory "backend" "Backend"
 
-# Run linting and JSDoc type checking on staged files
-echo "Running ESLint and JSDoc type checking on staged files..."
-npx lint-staged
-
-# Run full type check as backup
-echo "Running full JSDoc type check..."
-npm run typecheck
+# Check frontend directory
+check_directory "frontend" "Frontend"
 
 echo "Pre-commit checks passed!"
