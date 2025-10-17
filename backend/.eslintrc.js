@@ -1,17 +1,32 @@
 module.exports = {
-  env: {
-    node: true,
-    es2021: true,
-    jest: true
-  },
-  extends: [
-    'airbnb-base',
-    'plugin:jsdoc/recommended'
-  ],
-  plugins: ['jsdoc'],
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      __dirname: 'readonly',
+      __filename: 'readonly',
+      console: 'readonly',
+      Buffer: 'readonly',
+      global: 'readonly',
+      setTimeout: 'readonly',
+      setInterval: 'readonly',
+      clearTimeout: 'readonly',
+      clearInterval: 'readonly',
+      describe: 'readonly',
+      it: 'readonly',
+      test: 'readonly',
+      expect: 'readonly',
+      beforeEach: 'readonly',
+      afterEach: 'readonly',
+      beforeAll: 'readonly',
+      afterAll: 'readonly'
+    }
+  },
+  plugins: {
+    jsdoc: require('eslint-plugin-jsdoc')
   },
   settings: {
     jsdoc: {
@@ -24,10 +39,10 @@ module.exports = {
     }
   },
   rules: {
-    'no-console': 'off',
+    // Code style rules
+    'no-console': 'on',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'class-methods-use-this': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'max-len': ['error', { code: 120, ignoreComments: true }],
     'indent': ['error', 2],
     'quotes': ['error', 'single'],
@@ -39,6 +54,35 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'consistent-return': 'off',
     'no-param-reassign': 'off',
+    'no-var': 'error',
+    'prefer-const': 'error',
+    'prefer-arrow-callback': 'error',
+    'arrow-spacing': 'error',
+    'no-duplicate-imports': 'error',
+    'no-useless-constructor': 'error',
+    'no-useless-return': 'error',
+    'prefer-template': 'error',
+    'template-curly-spacing': 'error',
+    'object-shorthand': 'error',
+    'prefer-destructuring': ['error', {
+      array: true,
+      object: true
+    }, {
+      enforceForRenamedProperties: false
+    }],
+    // Import rules
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/order': ['error', {
+      groups: [
+        'builtin',
+        'external',
+        'internal',
+        'parent',
+        'sibling',
+        'index'
+      ],
+      'newlines-between': 'always'
+    }],
     // JSDoc rules
     'jsdoc/require-jsdoc': ['error', {
       require: {

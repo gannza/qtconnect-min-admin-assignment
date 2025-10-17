@@ -1,17 +1,32 @@
 module.exports = {
-  env: {
-    node: true,
-    es2021: true,
-    jest: true
-  },
-  extends: [
-    'airbnb-base',
-    'plugin:jsdoc/recommended'
-  ],
-  plugins: ['jsdoc'],
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      __dirname: 'readonly',
+      __filename: 'readonly',
+      console: 'readonly',
+      Buffer: 'readonly',
+      global: 'readonly',
+      setTimeout: 'readonly',
+      setInterval: 'readonly',
+      clearTimeout: 'readonly',
+      clearInterval: 'readonly',
+      describe: 'readonly',
+      it: 'readonly',
+      test: 'readonly',
+      expect: 'readonly',
+      beforeEach: 'readonly',
+      afterEach: 'readonly',
+      beforeAll: 'readonly',
+      afterAll: 'readonly'
+    }
+  },
+  plugins: {
+    jsdoc: require('eslint-plugin-jsdoc')
   },
   settings: {
     jsdoc: {
@@ -33,10 +48,9 @@ module.exports = {
     'jsdoc/require-returns-type': 'error',
     'jsdoc/no-undefined-types': 'error',
     // Disable other rules for type checking
-    'no-console': 'off',
-    'no-unused-vars': 'off',
+    'no-console': 'on',
+    'no-unused-vars': 'on',
     'class-methods-use-this': 'off',
-    'import/no-extraneous-dependencies': 'off',
     'max-len': 'off',
     'indent': 'off',
     'quotes': 'off',
@@ -48,6 +62,19 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'consistent-return': 'off',
     'no-param-reassign': 'off',
+    'no-var': 'off',
+    'prefer-const': 'off',
+    'prefer-arrow-callback': 'off',
+    'arrow-spacing': 'off',
+    'no-duplicate-imports': 'off',
+    'no-useless-constructor': 'off',
+    'no-useless-return': 'off',
+    'prefer-template': 'off',
+    'template-curly-spacing': 'off',
+    'object-shorthand': 'off',
+    'prefer-destructuring': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/order': 'off',
     'jsdoc/require-jsdoc': 'off',
     'jsdoc/require-param': 'off',
     'jsdoc/require-param-description': 'off',
