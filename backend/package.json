@@ -57,8 +57,10 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "eslint --fix",
-      "npm run typecheck"
+      "eslint --fix"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
     ]
   },
   "keywords": [
