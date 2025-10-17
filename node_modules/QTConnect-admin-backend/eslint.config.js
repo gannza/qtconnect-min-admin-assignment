@@ -102,5 +102,23 @@ module.exports = [
       'no-unused-expressions': 'off',
       'jsdoc/require-jsdoc': 'off'
     }
+  },
+  {
+    files: [
+      'jest.config.js',
+      'knexfile.js',
+      '*.config.js',
+      '**/migrations/**/*.js',
+      '**/seeds/**/*.js'
+    ],
+    rules: {
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-param-description': 'off',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-returns': 'off',
+      'jsdoc/require-returns-description': 'off',
+      'jsdoc/require-returns-type': 'off'
+    }
   }
 ];
