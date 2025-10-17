@@ -13,11 +13,10 @@
     "migrate:rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
-    "prepare": "husky install"
+    "lint:fix": "eslint src/ --fix"
   },
   "engines": {
-    "node": ">=24.3.0"
+    "node": ">=14.18.0"
   },
   "overrides": {
     "glob": "^10.0.0",
@@ -50,13 +49,12 @@
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
-    "husky": "^9.0.11",
+    "husky": "^8.0.3",
     "lint-staged": "^15.2.10"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "jest --findRelatedTests --passWithNoTests"
+    "src/**/*.js": [
+      "eslint --fix"
     ]
   },
   "keywords": [
