@@ -4190,3 +4190,9 @@ UniqueViolationError: insert into `users` (`createdAt`, `email`, `emailHash`, `r
 2025-10-18 16:02:36 [INFO]: CryptoUtils initialized successfully
 2025-10-18 16:02:36 [INFO]: Protobuf definitions loaded successfully
 2025-10-18 16:02:36 [INFO]: Server running on http://localhost:9090
+2025-10-18 16:02:54 [INFO]: Database initialized successfully
+2025-10-18 16:02:54 [INFO]: Loaded existing RSA keys
+2025-10-18 16:02:54 [INFO]: KeyManager initialized successfully
+2025-10-18 16:02:54 [INFO]: CryptoUtils initialized successfully
+2025-10-18 16:02:54 [INFO]: Protobuf definitions loaded successfully
+2025-10-18 16:02:54 [INFO]: Server running on http://localhost:9090
