@@ -40,8 +40,8 @@ class UserRepository {
     startDate.setDate(startDate.getDate() - days);
     
     return User.query()
-      .where('created_at', '>=', startDate)
-      .orderBy('created_at', 'desc');
+      .where('createdAt', '>=', startDate)
+      .orderBy('createdAt', 'desc');
   }
 
   /**
@@ -104,12 +104,12 @@ class UserRepository {
    * @param {object} options - Query options for filtering and sorting
    * @param {string} options.role - Filter by role
    * @param {string} options.status - Filter by status
-   * @param {string} options.sortBy - Sort field (default: 'created_at')
+   * @param {string} options.sortBy - Sort field (default: 'createdAt')
    * @param {string} options.sortOrder - Sort order (default: 'desc')
    * @returns {Promise<User[]>} Array of all users
    */
   static async findAll(options = {}) {
-    const { role, status, sortBy = 'created_at', sortOrder = 'desc' } = options;
+    const { role, status, sortBy = 'createdAt', sortOrder = 'desc' } = options;
     
     let query = User.query();
     
@@ -140,7 +140,7 @@ class UserRepository {
 
     const [users, totalCount] = await Promise.all([
       User.query()
-        .orderBy('created_at', 'desc')
+        .orderBy('createdAt', 'desc')
         .limit(limit)
         .offset(offset),
       User.query().resultSize()

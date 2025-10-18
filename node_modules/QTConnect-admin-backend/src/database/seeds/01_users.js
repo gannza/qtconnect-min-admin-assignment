@@ -10,6 +10,7 @@ exports.seed = async function(knex) {
 
   // Initialize crypto utils for generating signatures
   const cryptoUtils = new CryptoUtils();
+  await cryptoUtils.initialize();
 
   // Sample users data
   const users = [
@@ -70,26 +71,29 @@ exports.seed = async function(knex) {
     try {
       const signatureData = cryptoUtils.signUserEmail(user.email);
       
+      // Encode the signature for storage (Base64 encoding)
+      const encodedSignature = Buffer.from(JSON.stringify(signatureData.signature)).toString('base64');
+      
       return {
         email: user.email,
         role: user.role,
         status: user.status,
-        email_hash: signatureData.emailHash,
-        digital_signature: JSON.stringify(signatureData.signatures),
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        emailHash: signatureData.emailHash,
+        signature: encodedSignature,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
     } catch (error) {
-      console.error(`Error processing user ${user.email}:`, error);
+      logger.error('Failed to generate crypto signature for user', error);
       // Fallback without crypto signature
       return {
         email: user.email,
         role: user.role,
         status: user.status,
-        email_hash: null,
-        digital_signature: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        emailHash: null,
+        signature: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
     }
   });
@@ -97,5 +101,4 @@ exports.seed = async function(knex) {
   // Insert users into database
   await knex('users').insert(processedUsers);
 
-  console.log(`Seeded ${processedUsers.length} users successfully`);
 };

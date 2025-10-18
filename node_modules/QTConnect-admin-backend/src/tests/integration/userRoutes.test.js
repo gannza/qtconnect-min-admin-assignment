@@ -7,7 +7,6 @@ app.use(express.json());
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Error in test app:', err);
   res.status(500).json({ error: err.message });
 });
 
@@ -45,8 +44,8 @@ app.post('/api/users', (req, res) => {
     email,
     role,
     status,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   });
 });
 
@@ -107,9 +106,8 @@ app.get('/api/users/recent', (req, res) => {
   res.json([]);
 });
 
-// Catch-all route for debugging
+// Catch-all route
 app.use('*', (req, res) => {
-  console.log('Unmatched route:', req.method, req.originalUrl);
   res.status(404).json({ error: 'Route not found' });
 });
 
@@ -132,8 +130,8 @@ describe('User Routes Integration Tests', () => {
       expect(response.body).toHaveProperty('email', userData.email);
       expect(response.body).toHaveProperty('role', userData.role);
       expect(response.body).toHaveProperty('status', userData.status);
-      expect(response.body).toHaveProperty('created_at');
-      expect(response.body).toHaveProperty('updated_at');
+      expect(response.body).toHaveProperty('createdAt');
+      expect(response.body).toHaveProperty('updatedAt');
     });
 
     it('should create user with default values', async() => {

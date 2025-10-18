@@ -37,7 +37,13 @@ describe('UserService', () => {
       
       const mockSignatureData = {
         emailHash: 'hashed_email',
-        signatures: { signature: 'test_signature' }
+        signature: { 
+          signature: 'test_signature',
+          publicKey: 'test_public_key',
+          algorithm: 'RSA-SHA384',
+          keySize: 2048,
+          hashAlgorithm: 'SHA-384'
+        }
       };
       
       const mockUser = {
@@ -45,8 +51,8 @@ describe('UserService', () => {
         email: 'test@example.com',
         role: 'user',
         status: 'active',
-        email_hash: 'hashed_email',
-        digital_signature: '{"signature":"test_signature"}'
+        emailHash: 'hashed_email',
+        signature: '{"signature":"test_signature"}'
       };
 
       mockCryptoUtils.signUserEmail.mockReturnValue(mockSignatureData);
@@ -61,8 +67,8 @@ describe('UserService', () => {
         email: 'test@example.com',
         role: 'user',
         status: 'active',
-        email_hash: 'hashed_email',
-        digital_signature: '{"signature":"test_signature"}'
+        emailHash: 'hashed_email',
+        signature: expect.any(String) // Base64 encoded signature
       });
       expect(result).toEqual(mockUser);
       expect(logger.info).toHaveBeenCalledWith('User created successfully', {
@@ -80,7 +86,13 @@ describe('UserService', () => {
       
       mockCryptoUtils.signUserEmail.mockReturnValue({
         emailHash: 'hash',
-        signatures: {}
+        signature: { 
+          signature: 'test_signature',
+          publicKey: 'test_public_key',
+          algorithm: 'RSA-SHA384',
+          keySize: 2048,
+          hashAlgorithm: 'SHA-384'
+        }
       });
       mockUserRepository.create.mockRejectedValue(error);
 
@@ -107,7 +119,7 @@ describe('UserService', () => {
       expect(mockUserRepository.findAll).toHaveBeenCalledWith({
         role: undefined,
         status: undefined,
-        sortBy: 'created_at',
+        sortBy: 'createdAt',
         sortOrder: 'desc'
       });
       expect(result).toEqual(mockUsers);
@@ -129,7 +141,7 @@ describe('UserService', () => {
       expect(mockUserRepository.findAll).toHaveBeenCalledWith({
         role: 'user',
         status: 'active',
-        sortBy: 'created_at',
+        sortBy: 'createdAt',
         sortOrder: 'desc'
       });
       expect(result).toEqual(mockUsers);
@@ -141,15 +153,15 @@ describe('UserService', () => {
     it('should apply custom sorting', async() => {
       // Arrange
       const mockUsers = [
-        { id: 1, email: 'user1@example.com', created_at: '2023-01-01' },
-        { id: 2, email: 'user2@example.com', created_at: '2023-01-02' }
+        { id: 1, email: 'user1@example.com', createdAt: '2023-01-01' },
+        { id: 2, email: 'user2@example.com', createdAt: '2023-01-02' }
       ];
       
       mockUserRepository.findAll.mockResolvedValue(mockUsers);
 
       // Act
       const result = await UserService.getUsers({ 
-        sortBy: 'created_at', 
+        sortBy: 'createdAt', 
         sortOrder: 'asc' 
       });
 
@@ -157,12 +169,12 @@ describe('UserService', () => {
       expect(mockUserRepository.findAll).toHaveBeenCalledWith({
         role: undefined,
         status: undefined,
-        sortBy: 'created_at',
+        sortBy: 'createdAt',
         sortOrder: 'asc'
       });
       expect(result).toEqual(mockUsers);
-      expect(result[0].created_at).toBe('2023-01-01');
-      expect(result[1].created_at).toBe('2023-01-02');
+      expect(result[0].createdAt).toBe('2023-01-01');
+      expect(result[1].createdAt).toBe('2023-01-02');
     });
   });
 
@@ -227,7 +239,13 @@ describe('UserService', () => {
       const updateData = { email: 'new@example.com' };
       const mockSignatureData = {
         emailHash: 'new_hash',
-        signatures: { signature: 'new_signature' }
+        signature: { 
+          signature: 'new_signature',
+          publicKey: 'test_public_key',
+          algorithm: 'RSA-SHA384',
+          keySize: 2048,
+          hashAlgorithm: 'SHA-384'
+        }
       };
       const updatedUser = { id: 1, email: 'new@example.com' };
 
@@ -242,8 +260,8 @@ describe('UserService', () => {
       expect(mockCryptoUtils.signUserEmail).toHaveBeenCalledWith('new@example.com');
       expect(mockUserRepository.updateById).toHaveBeenCalledWith(1, {
         email: 'new@example.com',
-        email_hash: 'new_hash',
-        digital_signature: '{"signature":"new_signature"}'
+        emailHash: 'new_hash',
+        signature: expect.any(String) // Base64 encoded signature
       });
     });
   });
@@ -296,7 +314,7 @@ describe('UserService', () => {
     it('should return users created in last 7 days by default', async() => {
       // Arrange
       const mockUsers = [
-        { id: 1, email: 'user1@example.com', created_at: new Date() }
+        { id: 1, email: 'user1@example.com', createdAt: new Date() }
       ];
       mockUserRepository.getUsersCreatedInLastDays.mockResolvedValue(mockUsers);
 

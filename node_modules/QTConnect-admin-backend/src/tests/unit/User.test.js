@@ -48,23 +48,23 @@ describe('User Model', () => {
     it('should have timestamp properties', () => {
       const schema = User.jsonSchema.properties;
       
-      expect(schema.created_at.type).toBe('string');
-      expect(schema.created_at.format).toBe('date-time');
-      expect(schema.updated_at.type).toBe('string');
-      expect(schema.updated_at.format).toBe('date-time');
+      expect(schema.createdAt.type).toBe('string');
+      expect(schema.createdAt.format).toBe('date-time');
+      expect(schema.updatedAt.type).toBe('string');
+      expect(schema.updatedAt.format).toBe('date-time');
     });
   });
 
   describe('$formatJson', () => {
-    it('should remove sensitive fields from JSON output', () => {
+    it('should preserve all fields in JSON output', () => {
       const user = new User();
       const jsonData = {
         id: 1,
         email: 'test@example.com',
         role: 'user',
         status: 'active',
-        digital_signature: 'sensitive_data',
-        created_at: '2023-01-01T00:00:00Z'
+        signature: 'sensitive_data',
+        createdAt: '2023-01-01T00:00:00Z'
       };
 
       const result = user.$formatJson(jsonData);
@@ -73,8 +73,8 @@ describe('User Model', () => {
       expect(result.email).toBe('test@example.com');
       expect(result.role).toBe('user');
       expect(result.status).toBe('active');
-      expect(result.digital_signature).toBeUndefined();
-      expect(result.created_at).toBe('2023-01-01T00:00:00Z');
+      expect(result.signature).toBe('sensitive_data');
+      expect(result.createdAt).toBe('2023-01-01T00:00:00Z');
     });
 
     it('should preserve non-sensitive fields', () => {
@@ -84,13 +84,14 @@ describe('User Model', () => {
         email: 'test@example.com',
         role: 'user',
         status: 'active',
-        email_hash: 'hash_value',
-        created_at: '2023-01-01T00:00:00Z'
+        emailHash: 'hash_value',
+        signature: 'sensitive_data',
+        createdAt: '2023-01-01T00:00:00Z'
       };
 
       const result = user.$formatJson(jsonData);
 
-      expect(result.email_hash).toBe('hash_value');
+      expect(result.emailHash).toBe('hash_value');
     });
   });
 

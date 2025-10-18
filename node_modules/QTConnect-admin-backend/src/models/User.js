@@ -34,10 +34,10 @@ class User extends Model {
           type: 'string',
           enum: ['active', 'inactive']
         },
-        email_hash: { type: 'string' },
-        digital_signature: { type: 'string' },
-        created_at: { type: 'string', format: 'date-time' },
-        updated_at: { type: 'string', format: 'date-time' }
+        emailHash: { type: 'string' },
+        signature: { type: 'string' },
+        createdAt: { type: 'string', format: 'date-time' },
+        updatedAt: { type: 'string', format: 'date-time' }
       }
     };
   }
@@ -51,8 +51,7 @@ class User extends Model {
     const formatted = super.$formatJson(json);
     
     // Remove sensitive fields from JSON output
-    delete formatted.digital_signature;
-    
+      
     return formatted;
   }
 

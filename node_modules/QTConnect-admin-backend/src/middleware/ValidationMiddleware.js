@@ -14,10 +14,10 @@ const schemas = {
       'any.required': 'Email is required'
     }),
     role: Joi.string().valid('admin', 'user').default('user').messages({
-      'any.only': 'Role must be either "admin" or "user"'
+      'any.only': 'Role must be either \'admin\' or \'user\''
     }),
     status: Joi.string().valid('active', 'inactive').default('active').messages({
-      'any.only': 'Status must be either "active" or "inactive"'
+      'any.only': 'Status must be either \'active\' or \'inactive\''
     })
   }),
 
@@ -26,10 +26,10 @@ const schemas = {
       'string.email': 'Please provide a valid email address'
     }),
     role: Joi.string().valid('admin', 'user').optional().messages({
-      'any.only': 'Role must be either "admin" or "user"'
+      'any.only': 'Role must be either \'admin\' or \'user\''
     }),
     status: Joi.string().valid('active', 'inactive').optional().messages({
-      'any.only': 'Status must be either "active" or "inactive"'
+      'any.only': 'Status must be either \'active\' or \'inactive\''
     })
   }).min(1).messages({
     'object.min': 'At least one field must be provided for update'
@@ -39,16 +39,8 @@ const schemas = {
     id: Joi.string().pattern(/^\d+$/).required().messages({
       'string.pattern.base': 'ID must be a positive integer'
     })
-  }),
-
-  userQuery: Joi.object({
-    page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(100).default(10),
-    role: Joi.string().valid('admin', 'user').optional(),
-    status: Joi.string().valid('active', 'inactive').optional(),
-    sortBy: Joi.string().valid('id', 'email', 'role', 'status', 'created_at', 'updated_at').default('created_at'),
-    sortOrder: Joi.string().valid('asc', 'desc').default('desc')
   })
+
 };
 
 /**
@@ -87,13 +79,6 @@ const validate = (schema, source = 'body') => {
 
     if (error) {
       const errorMessage = error.details.map(detail => detail.message).join(', ');
-      console.log('Validation Error Details:', {
-        source,
-        data,
-        errors: error.details,
-        endpoint: req.originalUrl,
-        method: req.method
-      });
       const validationError = createError('Validation failed', {
         status: 400,
         type: 'validation_error',
@@ -120,13 +105,11 @@ const validate = (schema, source = 'body') => {
 const validateUserCreate = validate(schemas.userCreate, 'body');
 const validateUserUpdate = validate(schemas.userUpdate, 'body');
 const validateUserId = validate(schemas.userId, 'params');
-const validateUserQuery = validate(schemas.userQuery, 'query');
 
 module.exports = {
   validate,
   validateUserCreate,
   validateUserUpdate,
   validateUserId,
-  validateUserQuery,
   schemas
 };

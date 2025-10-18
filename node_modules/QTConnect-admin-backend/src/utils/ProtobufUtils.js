@@ -30,6 +30,8 @@ class ProtobufUtils {
       ProtobufUtils.UpdateUserRequest = ProtobufUtils.root.lookupType('user.UpdateUserRequest');
       ProtobufUtils.UserResponse = ProtobufUtils.root.lookupType('user.UserResponse');
       ProtobufUtils.UserListResponse = ProtobufUtils.root.lookupType('user.UserListResponse');
+      ProtobufUtils.PublicKeyInfo = ProtobufUtils.root.lookupType('user.PublicKeyInfo');
+      ProtobufUtils.PublicKeyResponse = ProtobufUtils.root.lookupType('user.PublicKeyResponse');
 
       ProtobufUtils.initialized = true;
       logger.info('Protobuf definitions loaded successfully');
@@ -56,10 +58,9 @@ class ProtobufUtils {
         email: user.email,
         role: user.role,
         status: user.status,
-        email_hash: user.email_hash || '',
-        digital_signature: user.digital_signature || '',
-        created_at: user.created_at,
-        updated_at: user.updated_at
+        emailHash: user.emailHash || '',
+        signature: user.signature || '',
+        createdAt: user.createdAt
       });
 
       // Verify payload structure
@@ -122,16 +123,15 @@ class ProtobufUtils {
         email: user.email,
         role: user.role,
         status: user.status,
-        email_hash: user.email_hash || '',
-        digital_signature: user.digital_signature || '',
-        created_at: user.created_at,
-        updated_at: user.updated_at
+        emailHash: user.emailHash || '',
+        signature: user.signature || '',
+        createdAt: user.createdAt
       }));
 
       const userListMessage = ProtobufUtils.UserList.create({
         users: serializedUsers,
-        total_count: users.length,
-        exported_at: new Date().toISOString()
+        totalCount: users.length,
+        exportedAt: new Date().toISOString()
       });
 
       // Verify payload structure

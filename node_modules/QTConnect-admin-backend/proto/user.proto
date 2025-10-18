@@ -8,17 +8,16 @@ message User {
   string email = 2;
   string role = 3;
   string status = 4;
-  string email_hash = 5;
-  string digital_signature = 6;
-  string created_at = 7;
-  string updated_at = 8;
+  string emailHash = 5;
+  string signature = 6;
+  string createdAt = 7;
 }
 
 // User list message for exporting multiple users
 message UserList {
   repeated User users = 1;
-  int32 total_count = 2;
-  string exported_at = 3;
+  int32 totalCount = 2;
+  string exportedAt = 3;
 }
 
 // User creation request
@@ -46,7 +45,22 @@ message UserResponse {
 // User list response
 message UserListResponse {
   repeated User users = 1;
-  int32 total_count = 2;
+  int32 totalCount = 2;
   bool success = 3;
   string message = 4;
+}
+
+// Public key information for frontend verification
+message PublicKeyInfo {
+  string publicKey = 1;
+  string algorithm = 2;
+  int32 keySize = 3;
+  string timestamp = 4;
+}
+
+// Public key response
+message PublicKeyResponse {
+  PublicKeyInfo keyInfo = 1;
+  bool success = 2;
+  string message = 3;
 }

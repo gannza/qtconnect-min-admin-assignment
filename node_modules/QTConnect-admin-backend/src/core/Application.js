@@ -7,6 +7,7 @@ const { basicMiddleware } = require('../middleware/BasicMiddleware');
 
 // Utils
 const { logger } = require('../utils/Logger');
+const CryptoUtils = require('../utils/CryptoUtils');
 
 // Config
 const ServerConfig = require('../config/ServerConfig');
@@ -16,6 +17,7 @@ const DatabaseConfig = require('../config/DatabaseConfig');
 const { appRoutes } = require('../routes/AppRoutes');
 const healthRoutes = require('../routes/HealthRoutes');
 const userRoutes = require('../routes/UserRoutes');
+const cryptoRoutes = require('../routes/CryptoRoutes');
 /**
  * Main Application class
  * Handles application initialization and configuration
@@ -39,6 +41,7 @@ class Application {
 
     try {
       await this.setupDatabase();
+      await this.setupCryptoUtils();
       this.setupMiddleware();
       this.setupRoutes();
       this.setupErrorHandling();
@@ -61,6 +64,20 @@ class Application {
   }
 
   /**
+   * Setup cryptographic utilities
+   */
+  async setupCryptoUtils() {
+    try {
+      const cryptoUtils = new CryptoUtils();
+      await cryptoUtils.initialize();
+      logger.info('CryptoUtils initialized successfully');
+    } catch (error) {
+      logger.error('Failed to initialize CryptoUtils:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Setup the middleware
    */
   setupMiddleware() {
@@ -75,6 +92,7 @@ class Application {
     appRoutes(this.app);
     this.app.use('/health', healthRoutes);
     this.app.use('/api/users', userRoutes);
+    this.app.use('/api/crypto', cryptoRoutes);
   }
 
   /**
@@ -94,7 +112,7 @@ class Application {
 
   /**
    * Get the Express app instance
-   * @returns {express.Application}
+   * @returns {express.Application} The Express application instance
    */
   getApp() {
     return this.app;
