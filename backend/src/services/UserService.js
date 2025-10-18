@@ -13,19 +13,23 @@ class UserService {
    * @returns {Promise<object>} Created user
    */
   static async createUser(userData) {
-   
     try {
       // Generate email hash and digital signature
-      const cryptoUtils = new CryptoUtils();
+      const cryptoUtils = await CryptoUtils.getInitializedInstance();
       const signatureData = cryptoUtils.signUserEmail(userData.email);
-      
-      // Prepare user data for creation
+      const encodedSignature = Buffer.from(
+        JSON.stringify(signatureData.signature)
+      ).toString('base64');
+
       const userToCreate = {
         email: userData.email,
         role: userData.role || 'user',
         status: userData.status || 'active',
-        email_hash: signatureData.emailHash,
-        digital_signature: JSON.stringify(signatureData.signatures)
+        emailHash: signatureData.emailHash,
+        // Encode the signature for storage (Base64 encoding)
+        signature: encodedSignature,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
 
       // Create user in database
@@ -56,7 +60,7 @@ class UserService {
       const {
         role,
         status,
-        sortBy = 'created_at',
+        sortBy = 'createdAt',
         sortOrder = 'desc'
       } = options;
 
@@ -111,15 +115,20 @@ class UserService {
     try {
       // Check if user exists
       const existingUser = await UserService.getUserById(userId);
-
       // If email is being updated, generate new hash and signature
       const updatedData = { ...updateData };
       if (updateData.email && updateData.email !== existingUser.email) {
-        const cryptoUtils = new CryptoUtils();
+        const cryptoUtils = await CryptoUtils.getInitializedInstance();
         const signatureData = cryptoUtils.signUserEmail(updateData.email);
-        updatedData.email_hash = signatureData.emailHash;
-        updatedData.digital_signature = JSON.stringify(signatureData.signatures);
+        updatedData.emailHash = signatureData.emailHash;
+        // Encode the signature for storage (Base64 encoding)
+        updatedData.signature = Buffer.from(
+          JSON.stringify(signatureData.signature)
+        ).toString('base64');
       }
+
+      // Always update the updatedAt timestamp
+      updatedData.updatedAt = new Date().toISOString();
 
       // Update user
       const user = await UserRepository.updateById(userId, updatedData);
@@ -175,7 +184,7 @@ class UserService {
   static async getUserStats() {
     try {
       const stats = await UserRepository.getUserStats();
-      
+
       return stats;
     } catch (error) {
       logger.error('Failed to get user stats', error);
@@ -191,14 +200,13 @@ class UserService {
   static async getUsersCreatedInLastDays(days = 7) {
     try {
       const users = await UserRepository.getUsersCreatedInLastDays(days);
-      
+
       return users;
     } catch (error) {
       logger.error('Failed to get users created in last days', error);
       throw error;
     }
   }
-
 }
 
 module.exports = UserService;

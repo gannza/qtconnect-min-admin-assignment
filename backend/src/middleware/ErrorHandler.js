@@ -76,8 +76,8 @@ class ErrorHandler {
       return {
         type: 'duplicate_key_error',
         severity: 'low',
-        statusCode: 409,
-        userMessage: 'Resource already exists'
+        statusCode: 402,
+        userMessage: 'Resource already exists (check user email)'
       };
     }
 
@@ -146,12 +146,13 @@ class ErrorHandler {
       }
     };
 
-    // Include additional details in development
+    // Include additional details in development (sanitized)
     if (isDevelopment) {
       response.error.details = {
         originalMessage: err.message,
         stack: err.stack,
-        ...err
+        name: err.name,
+        code: err.code
       };
     }
 
@@ -171,7 +172,7 @@ class ErrorHandler {
       };
     }
 
-    // Include request information for debugging
+    // Include request information
     if (isDevelopment && err.requestInfo) {
       response.error.request = err.requestInfo;
     }

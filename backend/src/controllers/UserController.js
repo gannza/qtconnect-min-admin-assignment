@@ -7,12 +7,10 @@ const { asyncHandler } = require('../middleware/ErrorHandler');
  * User controller following SOLID principles
  */
 class UserController {
-
   /**
    * Create a new user
    */
   static createUser = asyncHandler(async(req, res) => {
-
     try {
       const user = await UserService.createUser(req.body);
 
@@ -20,24 +18,6 @@ class UserController {
         success: true,
         message: 'User created successfully',
         data: user
-      });
-    } catch (error) {
-      throw error;
-    }
-  });
-
-  /**
-   * Get all users with filtering and sorting
-   */
-  static getUsers = asyncHandler(async(req, res) => {
-    try {
-      const users = await UserService.getUsers(req.query);
-
-      res.json({
-        success: true,
-        message: 'Users retrieved successfully',
-        data: users,
-        count: users.length
       });
     } catch (error) {
       throw error;
@@ -114,24 +94,18 @@ class UserController {
   /**
    * Export users in protobuf format
    */
-  static exportUsers = asyncHandler(async(req, res) => {
+  static getUsers = asyncHandler(async(req, res) => {
     try {
       const users = await UserService.getUsers(req.query);
 
       const protobufBuffer = ProtobufUtils.serializeUserList(users);
 
-      res.set({
-        'Content-Type': 'application/x-protobuf',
-        'Content-Disposition': 'attachment; filename="users.pb"',
-        'Content-Length': protobufBuffer.length
+      res.json({
+        success: true,
+        data: protobufBuffer.toString('base64'),
+        message: 'Users with Protobuf support retrieved successfully'
       });
 
-      logger.info('Users exported in protobuf format', {
-        userCount: users.length,
-        bufferSize: protobufBuffer.length
-      });
-
-      res.send(protobufBuffer);
     } catch (error) {
       logger.error('Failed to export users in protobuf format', error);
 
@@ -147,7 +121,7 @@ class UserController {
       const users = await UserService.getUsersCreatedInLastDays(req.query.days);
 
       const chartData = users.reduce((acc, user) => {
-        const [date] = new Date(user.created_at).toISOString().split('T');
+        const [date] = new Date(user.createdAt).toISOString().split('T');
         acc[date] = (acc[date] || 0) + 1;
         return acc;
       }, {});
