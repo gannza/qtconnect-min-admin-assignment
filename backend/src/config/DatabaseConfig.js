@@ -6,10 +6,11 @@ const { logger } = require('../utils/Logger');
  */
 class DatabaseConfig {
   
-
   /**
-   *
+   * Initialize the database
    */
+  
+ 
   static async initialize() {
     try {
       const { database } = require('../database/Database');

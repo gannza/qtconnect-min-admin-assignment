@@ -100,6 +100,34 @@ class UserRepository {
   }
 
   /**
+   * Find all users without pagination
+   * @param {object} options - Query options for filtering and sorting
+   * @param {string} options.role - Filter by role
+   * @param {string} options.status - Filter by status
+   * @param {string} options.sortBy - Sort field (default: 'created_at')
+   * @param {string} options.sortOrder - Sort order (default: 'desc')
+   * @returns {Promise<User[]>} Array of all users
+   */
+  static async findAll(options = {}) {
+    const { role, status, sortBy = 'created_at', sortOrder = 'desc' } = options;
+    
+    let query = User.query();
+    
+    // Apply filters
+    if (role) {
+      query = query.where('role', role);
+    }
+    if (status) {
+      query = query.where('status', status);
+    }
+    
+    // Apply sorting
+    query = query.orderBy(sortBy, sortOrder);
+    
+    return query;
+  }
+
+  /**
    * Get all users with pagination
    * @param {object} options - Pagination options
    * @param {number} options.page - Page number (default: 1)

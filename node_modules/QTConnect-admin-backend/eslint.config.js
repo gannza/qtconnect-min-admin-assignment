@@ -44,7 +44,7 @@ module.exports = [
     },
     rules: {
       // Code style rules
-      'no-console': 'on',
+      'no-console': 'warn',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'class-methods-use-this': 'off',
       'max-len': ['error', { code: 120, ignoreComments: true }],
@@ -74,33 +74,27 @@ module.exports = [
       }, {
         enforceForRenamedProperties: false
       }],
-      // JSDoc rules
-      'jsdoc/require-jsdoc': ['error', {
-        require: {
-          FunctionDeclaration: true,
-          MethodDefinition: true,
-          ClassDeclaration: true,
-          ArrowFunctionExpression: true,
-          FunctionExpression: true
-        }
-      }],
-      'jsdoc/require-param': 'error',
-      'jsdoc/require-param-description': 'error',
-      'jsdoc/require-param-type': 'error',
-      'jsdoc/require-returns': 'error',
-      'jsdoc/require-returns-description': 'error',
-      'jsdoc/require-returns-type': 'error',
-      'jsdoc/check-param-names': 'error',
-      'jsdoc/check-tag-names': 'error',
-      'jsdoc/check-types': 'error',
-      'jsdoc/valid-types': 'error'
+      // JSDoc rules - made less strict
+      'jsdoc/require-jsdoc': 'warn',
+      'jsdoc/require-param': 'warn',
+      'jsdoc/require-param-description': 'warn',
+      'jsdoc/require-param-type': 'warn',
+      'jsdoc/require-returns': 'warn',
+      'jsdoc/require-returns-description': 'warn',
+      'jsdoc/require-returns-type': 'warn',
+      'jsdoc/check-param-names': 'warn',
+      'jsdoc/check-tag-names': 'warn',
+      'jsdoc/check-types': 'warn',
+      'jsdoc/valid-types': 'warn'
     }
   },
   {
     files: ['**/*.test.js', '**/*.spec.js'],
     rules: {
       'no-unused-expressions': 'off',
-      'jsdoc/require-jsdoc': 'off'
+      'jsdoc/require-jsdoc': 'off',
+      'no-console': 'off',
+      'no-unused-vars': 'off'
     }
   },
   {

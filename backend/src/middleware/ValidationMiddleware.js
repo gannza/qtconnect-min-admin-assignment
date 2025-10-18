@@ -8,19 +8,37 @@ const { createError } = require('./ErrorHandler');
 // Define schemas
 const schemas = {
   userCreate: Joi.object({
-    email: Joi.string().email().required(),
-    role: Joi.string().valid('admin', 'user').default('user'),
-    status: Joi.string().valid('active', 'inactive').default('active')
+    email: Joi.string().email().required().messages({
+      'string.empty': 'Email is required',
+      'string.email': 'Please provide a valid email address',
+      'any.required': 'Email is required'
+    }),
+    role: Joi.string().valid('admin', 'user').default('user').messages({
+      'any.only': 'Role must be either "admin" or "user"'
+    }),
+    status: Joi.string().valid('active', 'inactive').default('active').messages({
+      'any.only': 'Status must be either "active" or "inactive"'
+    })
   }),
 
   userUpdate: Joi.object({
-    email: Joi.string().email().optional(),
-    role: Joi.string().valid('admin', 'user').optional(),
-    status: Joi.string().valid('active', 'inactive').optional()
-  }).min(1), // At least one field required
+    email: Joi.string().email().optional().messages({
+      'string.email': 'Please provide a valid email address'
+    }),
+    role: Joi.string().valid('admin', 'user').optional().messages({
+      'any.only': 'Role must be either "admin" or "user"'
+    }),
+    status: Joi.string().valid('active', 'inactive').optional().messages({
+      'any.only': 'Status must be either "active" or "inactive"'
+    })
+  }).min(1).messages({
+    'object.min': 'At least one field must be provided for update'
+  }), // At least one field required
 
   userId: Joi.object({
-    id: Joi.number().integer().positive().required()
+    id: Joi.string().pattern(/^\d+$/).required().messages({
+      'string.pattern.base': 'ID must be a positive integer'
+    })
   }),
 
   userQuery: Joi.object({
@@ -42,6 +60,26 @@ const schemas = {
 const validate = (schema, source = 'body') => {
   return (req, res, next) => {
     const data = req[source];
+    
+    // Check if request body is empty for POST/PUT requests
+    if (source === 'body' && (req.method === 'POST' || req.method === 'PUT')) {
+      if (!data || Object.keys(data).length === 0) {
+        const validationError = createError('Request body is required', {
+          status: 400,
+          type: 'validation_error',
+          message: 'Request body cannot be empty. Please provide the required data.',
+          requestInfo: {
+            operation: 'validation',
+            source,
+            data,
+            endpoint: req.originalUrl,
+            method: req.method
+          }
+        });
+        return next(validationError);
+      }
+    }
+    
     const { error, value } = schema.validate(data, { 
       abortEarly: false,
       stripUnknown: true 
@@ -49,6 +87,13 @@ const validate = (schema, source = 'body') => {
 
     if (error) {
       const errorMessage = error.details.map(detail => detail.message).join(', ');
+      console.log('Validation Error Details:', {
+        source,
+        data,
+        errors: error.details,
+        endpoint: req.originalUrl,
+        method: req.method
+      });
       const validationError = createError('Validation failed', {
         status: 400,
         type: 'validation_error',

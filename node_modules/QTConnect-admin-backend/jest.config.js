@@ -3,7 +3,8 @@ module.exports = {
   roots: ['<rootDir>/src'],
   testMatch: [
     '**/__tests__/**/*.js',
-    '**/?(*.)+(spec|test).js'
+    '**/?(*.)+(spec|test).js',
+    '**/tests/**/*.test.js'
   ],
   collectCoverageFrom: [
     'src/**/*.js',
@@ -25,6 +26,7 @@ module.exports = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setup.js'],
   // Disable coverage collection for Node.js v14 compatibility
   collectCoverage: false,
   coveragePathIgnorePatterns: [

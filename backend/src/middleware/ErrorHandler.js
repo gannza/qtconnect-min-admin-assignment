@@ -2,7 +2,6 @@ const { logger } = require('../utils/Logger');
 
 /**
  * Global error handler middleware
- * Following SOLID principles for error handling
  */
 class ErrorHandler {
   /**
@@ -14,22 +13,21 @@ class ErrorHandler {
      */
     
   /**
-   *
-   * @param err
-   * @param req
-   * @param res
-   * @param next
-   * @param _next
+   * Handle errors
+   * @param {Error} err - Error object
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   * @param {Function} _next - Express next function (unused)
    */
   static handle(err, req, res, _next) {
     // Log the error
     logger.error('Error occurred', err);
 
     // Determine error type and severity
-    const errorInfo = this.categorizeError(err);
+    const errorInfo = ErrorHandler.categorizeError(err);
     
     // Prepare error response
-    const errorResponse = this.prepareErrorResponse(err, errorInfo);
+    const errorResponse = ErrorHandler.prepareErrorResponse(err, errorInfo);
 
     // Send error response using the response object
     res.status(errorInfo.statusCode).json(errorResponse);
@@ -42,12 +40,24 @@ class ErrorHandler {
    */
   static categorizeError(err) {
     // Validation errors
-    if (err.name === 'ValidationError' || err.type === 'validation') {
+    if (err.name === 'ValidationError' || err.type === 'validation' || err.type === 'validation_error') {
+      // Extract specific validation error messages
+      let userMessage = 'Validation failed';
+      
+      if (err.details && Array.isArray(err.details)) {
+        // Extract Joi validation error messages
+        const errorMessages = err.details.map(detail => detail.message).join(', ');
+        userMessage = errorMessages;
+      } else if (err.message && err.message !== 'Validation failed') {
+        // Use the specific error message if available
+        userMessage = err.message;
+      }
+      
       return {
         type: 'validation_error',
         severity: 'low',
         statusCode: 400,
-        userMessage: 'Validation failed'
+        userMessage
       };
     }
 
@@ -149,6 +159,17 @@ class ErrorHandler {
     if (err.validationResult && !err.validationResult.isValid) {
       response.error.validation = err.validationResult.toJSON();
     }
+    
+    // Include Joi validation details for validation errors
+    if (errorInfo.type === 'validation_error' && err.details) {
+      response.error.validation = {
+        errors: err.details.map(detail => ({
+          field: detail.path.join('.'),
+          message: detail.message,
+          value: detail.context?.value
+        }))
+      };
+    }
 
     // Include request information for debugging
     if (isDevelopment && err.requestInfo) {
@@ -182,6 +203,7 @@ class ErrorHandler {
     error.type = options.type || 'custom_error';
     error.validationResult = options.validationResult;
     error.requestInfo = options.requestInfo;
+    error.details = options.details;
     
     return error;
   }
@@ -192,7 +214,7 @@ class ErrorHandler {
    * @param {object} res - Express response object
    */
   static handleNotFound(req, res) {
-    const error = this.createError('Route not found', {
+    const error = ErrorHandler.createError('Route not found', {
       name: 'NotFoundError',
       status: 404,
       type: 'not_found_error',
@@ -204,7 +226,7 @@ class ErrorHandler {
       }
     });
 
-    this.handle(error, req, res);
+    ErrorHandler.handle(error, req, res);
   }
 }
 

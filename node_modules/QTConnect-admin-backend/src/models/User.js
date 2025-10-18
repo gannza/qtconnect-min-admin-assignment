@@ -1,10 +1,19 @@
 const { Model } = require('objection');
 
+/**
+ *
+ */
 class User extends Model {
+  /**
+   *
+   */
   static get tableName() {
     return 'users';
   }
 
+  /**
+   *
+   */
   static get jsonSchema() {
     return {
       type: 'object',
@@ -34,6 +43,10 @@ class User extends Model {
   }
 
   // Transform data when fetching
+  /**
+   *
+   * @param json
+   */
   $formatJson(json) {
     const formatted = super.$formatJson(json);
     
@@ -44,11 +57,17 @@ class User extends Model {
   }
 
   // Instance methods
+  /**
+   *
+   */
   isActive() {
     //Check if the user is active
     return this.status === 'active';
   }
 
+  /**
+   *
+   */
   isAdmin() {
     //Check if the user is an admin
     return this.role === 'admin';

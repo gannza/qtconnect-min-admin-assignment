@@ -6,37 +6,32 @@ const { logger } = require('./Logger');
  * Protobuf utilities for serialization and deserialization
  */
 class ProtobufUtils {
-  /**
-   *
-   */
-  constructor() {
-    this.root = null;
-    this.User = null;
-    this.UserList = null;
-    this.initialized = false;
-  }
+  static root = null;
+  static User = null;
+  static UserList = null;
+  static initialized = false;
 
   /**
    * Initialize protobuf definitions
    */
-  async initialize() {
-    if (this.initialized) {
+  static async initialize() {
+    if (ProtobufUtils.initialized) {
       return;
     }
 
     try {
       const protoPath = path.join(__dirname, '../../proto/user.proto');
-      this.root = await protobuf.load(protoPath);
+      ProtobufUtils.root = await protobuf.load(protoPath);
       
       // Load message types
-      this.User = this.root.lookupType('user.User');
-      this.UserList = this.root.lookupType('user.UserList');
-      this.CreateUserRequest = this.root.lookupType('user.CreateUserRequest');
-      this.UpdateUserRequest = this.root.lookupType('user.UpdateUserRequest');
-      this.UserResponse = this.root.lookupType('user.UserResponse');
-      this.UserListResponse = this.root.lookupType('user.UserListResponse');
+      ProtobufUtils.User = ProtobufUtils.root.lookupType('user.User');
+      ProtobufUtils.UserList = ProtobufUtils.root.lookupType('user.UserList');
+      ProtobufUtils.CreateUserRequest = ProtobufUtils.root.lookupType('user.CreateUserRequest');
+      ProtobufUtils.UpdateUserRequest = ProtobufUtils.root.lookupType('user.UpdateUserRequest');
+      ProtobufUtils.UserResponse = ProtobufUtils.root.lookupType('user.UserResponse');
+      ProtobufUtils.UserListResponse = ProtobufUtils.root.lookupType('user.UserListResponse');
 
-      this.initialized = true;
+      ProtobufUtils.initialized = true;
       logger.info('Protobuf definitions loaded successfully');
     } catch (error) {
       logger.error('Failed to load protobuf definitions:', error);
@@ -49,14 +44,14 @@ class ProtobufUtils {
    * @param {object} user - User object
    * @returns {Buffer} Serialized protobuf buffer
    */
-  serializeUser(user) {
-    if (!this.initialized) {
+  static serializeUser(user) {
+    if (!ProtobufUtils.initialized) {
       throw new Error('ProtobufUtils not initialized');
     }
 
     try {
       
-      const userMessage = this.User.create({
+      const userMessage = ProtobufUtils.User.create({
         id: user.id,
         email: user.email,
         role: user.role,
@@ -67,7 +62,11 @@ class ProtobufUtils {
         updated_at: user.updated_at
       });
 
-      const buffer = this.User.encode(userMessage).finish();
+      // Verify payload structure
+      const errMsg = ProtobufUtils.User.verify(userMessage);
+      if (errMsg) throw Error(errMsg);
+
+      const buffer = ProtobufUtils.User.encode(userMessage).finish();
       
       return buffer;
     } catch (error) {
@@ -111,8 +110,8 @@ class ProtobufUtils {
    * @param {Array} users - Array of user objects
    * @returns {Buffer} Serialized protobuf buffer
    */
-  serializeUserList(users) {
-    if (!this.initialized) {
+  static serializeUserList(users) {
+    if (!ProtobufUtils.initialized) {
       throw new Error('ProtobufUtils not initialized');
     }
 
@@ -129,13 +128,17 @@ class ProtobufUtils {
         updated_at: user.updated_at
       }));
 
-      const userListMessage = this.UserList.create({
+      const userListMessage = ProtobufUtils.UserList.create({
         users: serializedUsers,
         total_count: users.length,
         exported_at: new Date().toISOString()
       });
 
-      const buffer = this.UserList.encode(userListMessage).finish();
+      // Verify payload structure
+      const errMsg = ProtobufUtils.UserList.verify(userListMessage);
+      if (errMsg) throw Error(errMsg);
+
+      const buffer = ProtobufUtils.UserList.encode(userListMessage).finish();
       
     
       return buffer;
@@ -239,6 +242,11 @@ class ProtobufUtils {
   }
 }
 
+// Initialize ProtobufUtils when module is loaded
+ProtobufUtils.initialize().catch(error => {
+  logger.error('Failed to initialize ProtobufUtils:', error);
+});
+
 module.exports = {
-  protobufUtils: new ProtobufUtils()
+  ProtobufUtils
 };

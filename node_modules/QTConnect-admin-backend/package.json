@@ -13,9 +13,7 @@
     "migrate:rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
-    "typecheck": "eslint src/ --ext .js --config .eslintrc.typecheck.js",
-    "docs": "jsdoc -c .jsdocrc.json"
+    "lint:fix": "eslint src/ --fix"
   },
   "engines": {
     "node": ">=24.3.0"

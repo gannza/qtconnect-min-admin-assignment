@@ -15,6 +15,7 @@ const DatabaseConfig = require('../config/DatabaseConfig');
 // Routes
 const { appRoutes } = require('../routes/AppRoutes');
 const healthRoutes = require('../routes/HealthRoutes');
+const userRoutes = require('../routes/UserRoutes');
 /**
  * Main Application class
  * Handles application initialization and configuration

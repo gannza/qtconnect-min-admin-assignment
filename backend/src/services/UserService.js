@@ -8,22 +8,16 @@ const { createError } = require('../middleware/ErrorHandler');
  */
 class UserService {
   /**
-   *
-   */
-  constructor() {
-    this.cryptoUtils = new CryptoUtils();
-  }
-
-  /**
    * Create a new user
    * @param {object} userData - User data
    * @returns {Promise<object>} Created user
    */
-  async createUser(userData) {
+  static async createUser(userData) {
    
     try {
       // Generate email hash and digital signature
-      const signatureData = this.cryptoUtils.signUserEmail(userData.email);
+      const cryptoUtils = new CryptoUtils();
+      const signatureData = cryptoUtils.signUserEmail(userData.email);
       
       // Prepare user data for creation
       const userToCreate = {
@@ -53,58 +47,28 @@ class UserService {
   }
 
   /**
-   * Get all users with optional filtering and pagination
+   * Get all users with optional filtering and sorting
    * @param {object} options - Query options
-   * @returns {Promise<object>} Users and pagination info
+   * @returns {Promise<User[]>} Array of users
    */
-  async getUsers(options = {}) {
+  static async getUsers(options = {}) {
     try {
       const {
-        page = 1,
-        limit = 10,
         role,
         status,
         sortBy = 'created_at',
         sortOrder = 'desc'
       } = options;
 
-      // Use repository for pagination
-      const result = await UserRepository.findAllWithPagination({
-        page,
-        limit
-      });
-      
-      let { users } = result;
-      const totalCount = result.pagination.total;
-
-      // Apply additional filters if needed
-      if (role || status) {
-        users = users.filter(user => {
-          if (role && user.role !== role) return false;
-          if (status && user.status !== status) return false;
-          return true;
-        });
-      }
-
-      // Apply sorting
-      users.sort((a, b) => {
-        const aVal = a[sortBy];
-        const bVal = b[sortBy];
-        if (sortOrder === 'desc') {
-          return bVal > aVal ? 1 : -1;
-        }
-        return aVal > bVal ? 1 : -1;
+      // Use repository to get all users with filtering and sorting
+      const users = await UserRepository.findAll({
+        role,
+        status,
+        sortBy,
+        sortOrder
       });
 
-      return {
-        users,
-        pagination: {
-          page: parseInt(page),
-          limit: parseInt(limit),
-          total: totalCount,
-          pages: Math.ceil(totalCount / limit)
-        }
-      };
+      return users;
     } catch (error) {
       logger.error('Failed to get users', error);
       throw error;
@@ -116,7 +80,7 @@ class UserService {
    * @param {number} userId - User ID
    * @returns {Promise<object>} User object
    */
-  async getUserById(userId) {
+  static async getUserById(userId) {
     try {
       const user = await UserRepository.findById(userId);
 
@@ -143,15 +107,16 @@ class UserService {
    * @param {object} updateData - Data to update
    * @returns {Promise<object>} Updated user
    */
-  async updateUser(userId, updateData) {
+  static async updateUser(userId, updateData) {
     try {
       // Check if user exists
-      const existingUser = await this.getUserById(userId);
+      const existingUser = await UserService.getUserById(userId);
 
       // If email is being updated, generate new hash and signature
       const updatedData = { ...updateData };
       if (updateData.email && updateData.email !== existingUser.email) {
-        const signatureData = this.cryptoUtils.signUserEmail(updateData.email);
+        const cryptoUtils = new CryptoUtils();
+        const signatureData = cryptoUtils.signUserEmail(updateData.email);
         updatedData.email_hash = signatureData.emailHash;
         updatedData.digital_signature = JSON.stringify(signatureData.signatures);
       }
@@ -177,10 +142,10 @@ class UserService {
    * @param {number} userId - User ID
    * @returns {Promise<boolean>} Success status
    */
-  async deleteUser(userId) {
+  static async deleteUser(userId) {
     try {
       // Check if user exists
-      await this.getUserById(userId);
+      await UserService.getUserById(userId);
 
       // Delete user
       const deletedCount = await UserRepository.deleteById(userId);
@@ -207,7 +172,7 @@ class UserService {
    * Get user statistics
    * @returns {Promise<object>} User statistics
    */
-  async getUserStats() {
+  static async getUserStats() {
     try {
       const stats = await UserRepository.getUserStats();
       
@@ -223,7 +188,7 @@ class UserService {
    * @param {number} days - Number of days
    * @returns {Promise<Array>} Users created in the specified period
    */
-  async getUsersCreatedInLastDays(days = 7) {
+  static async getUsersCreatedInLastDays(days = 7) {
     try {
       const users = await UserRepository.getUsersCreatedInLastDays(days);
       
@@ -234,10 +199,6 @@ class UserService {
     }
   }
 
-  /**
-   * Update user count metrics
-   * @returns {Promise<void>}
-   */
 }
 
 module.exports = UserService;

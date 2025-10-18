@@ -5,6 +5,9 @@ const EC = require('elliptic').ec;
  * Cryptographic utilities for ECDSA operations with SHA-384
  */
 class CryptoUtils {
+  /**
+   *
+   */
   constructor() {
     this.ecdsa = new EC('secp256k1');
     this.ecdsaKeyPair = null;
@@ -42,7 +45,7 @@ class CryptoUtils {
   /**
    * Sign data using ECDSA with SHA-384
    * @param {string} data - Data to sign
-   * @returns {Object} Signature information
+   * @returns {object} Signature information
    */
   signWithECDSA(data) {
     if (!this.ecdsaKeyPair) {
@@ -89,7 +92,7 @@ class CryptoUtils {
   /**
    * Sign user email hash with ECDSA and SHA-384
    * @param {string} email - User email
-   * @returns {Object} Complete signature information
+   * @returns {object} Complete signature information
    */
   signUserEmail(email) {
     if (!email || typeof email !== 'string') {
@@ -122,8 +125,8 @@ class CryptoUtils {
   /**
    * Verify user email signature
    * @param {string} email - Original email
-   * @param {Object} signatureData - Signature data from signUserEmail
-   * @returns {Object} Verification results
+   * @param {object} signatureData - Signature data from signUserEmail
+   * @returns {object} Verification results
    */
   verifyUserEmailSignature(email, signatureData) {
     try {

@@ -1,9 +1,12 @@
-const knex = require("knex");
-const { Model } = require("objection");
-const knexConfig = require("../../knexfile");
+const knex = require('knex');
+const { Model } = require('objection');
+const knexConfig = require('../../knexfile');
 
+/**
+ *
+ */
 class Database {
-    /**
+  /**
      * Constructor for the Database class
      */
   constructor() {
@@ -14,19 +17,19 @@ class Database {
   /**
    * Initialize the database
    */
-    async initialize() {
+  async initialize() {
     if (this.isInitialized) {
       return;
     }
 
-    const environment = process.env.NODE_ENV || "development";
+    const environment = process.env.NODE_ENV || 'development';
     this.knex = knex(knexConfig[environment]);
 
     // Bind Objection.js to Knex instance
     Model.knex(this.knex);
 
     // Test the connection
-    await this.knex.raw("SELECT 1");
+    await this.knex.raw('SELECT 1');
 
     this.isInitialized = true;
   }
@@ -46,7 +49,7 @@ class Database {
    */
   getKnex() {
     if (!this.isInitialized) {
-      throw new Error("Database not initialized. Call initialize() first.");
+      throw new Error('Database not initialized. Call initialize() first.');
     }
     return this.knex;
   }
@@ -75,7 +78,7 @@ class Database {
   /**
    * Seed the database
    */
-    async seed() {
+  async seed() {
     if (!this.isInitialized) {
       await this.initialize();
     }
@@ -88,6 +91,6 @@ class Database {
  */
 
 module.exports = {
-    database: new Database()
-  };
+  database: new Database()
+};
   
