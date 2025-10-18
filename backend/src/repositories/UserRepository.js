@@ -1,5 +1,8 @@
 const User = require('../models/User');
 
+/**
+ *
+ */
 class UserRepository {
   /**
    * Find a user by email
@@ -43,7 +46,7 @@ class UserRepository {
 
   /**
    * Get user statistics
-   * @returns {Promise<Object>} Object containing user statistics
+   * @returns {Promise<object>} Object containing user statistics
    */
   static async getUserStats() {
     const totalUsers = await User.query().resultSize();
@@ -61,7 +64,7 @@ class UserRepository {
 
   /**
    * Create a new user
-   * @param {Object} userData - User data to create
+   * @param {object} userData - User data to create
    * @returns {Promise<User>} Created user instance
    */
   static async create(userData) {
@@ -80,7 +83,7 @@ class UserRepository {
   /**
    * Update a user by ID
    * @param {number} id - User ID
-   * @param {Object} updateData - Data to update
+   * @param {object} updateData - Data to update
    * @returns {Promise<User>} Updated user instance
    */
   static async updateById(id, updateData) {
@@ -98,10 +101,10 @@ class UserRepository {
 
   /**
    * Get all users with pagination
-   * @param {Object} options - Pagination options
+   * @param {object} options - Pagination options
    * @param {number} options.page - Page number (default: 1)
    * @param {number} options.limit - Items per page (default: 10)
-   * @returns {Promise<Object>} Object containing users and pagination info
+   * @returns {Promise<object>} Object containing users and pagination info
    */
   static async findAllWithPagination(options = {}) {
     const { page = 1, limit = 10 } = options;

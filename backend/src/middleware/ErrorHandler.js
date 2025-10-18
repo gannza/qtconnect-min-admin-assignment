@@ -5,15 +5,22 @@ const { logger } = require('../utils/Logger');
  * Following SOLID principles for error handling
  */
 class ErrorHandler {
-    /**
+  /**
      * Handle errors
      * @param {Error} err - Error object
-     * @param {Object} req - Express request object
-     * @param {Object} res - Express response object
+     * @param {object} req - Express request object
+     * @param {object} res - Express response object
      * @param {Function} next - Express next function
      */
-
-  static handle(err, req, res, next) {
+    
+  /**
+   *
+   * @param err
+   * @param req
+   * @param res
+   * @param next
+   */
+  static handle(err, req, res, _next) {
     // Log the error
     logger.error('Error occurred', err);
 
@@ -30,9 +37,8 @@ class ErrorHandler {
   /**
    * Categorize error and determine appropriate response
    * @param {Error} err - Error object
-   * @returns {Object} Error information
+   * @returns {object} Error information
    */
-  
   static categorizeError(err) {
     // Validation errors
     if (err.name === 'ValidationError' || err.type === 'validation') {
@@ -116,8 +122,8 @@ class ErrorHandler {
   /**
    * Prepare error response based on environment and error type
    * @param {Error} err - Error object
-   * @param {Object} errorInfo - Error categorization info
-   * @returns {Object} Error response object
+   * @param {object} errorInfo - Error categorization info
+   * @returns {object} Error response object
    */
   static prepareErrorResponse(err, errorInfo) {
     const isDevelopment = process.env.NODE_ENV === 'development';
@@ -165,7 +171,7 @@ class ErrorHandler {
   /**
    * Create a custom error with additional context
    * @param {string} message - Error message
-   * @param {Object} options - Error options
+   * @param {object} options - Error options
    * @returns {Error} Custom error
    */
   static createError(message, options = {}) {
@@ -181,8 +187,8 @@ class ErrorHandler {
 
   /**
    * Handle 404 errors
-   * @param {Object} req - Express request object
-   * @param {Object} res - Express response object
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
    */
   static handleNotFound(req, res) {
     const error = this.createError('Route not found', {

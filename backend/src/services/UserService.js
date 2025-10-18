@@ -5,21 +5,19 @@ const { createError } = require('../middleware/ErrorHandler');
 
 /**
  * User service following SOLID principles
- * Single Responsibility: Handles all user-related business logic
- * Open/Closed: Can be extended without modification
- * Liskov Substitution: Can be used interchangeably with other services
- * Interface Segregation: Clean, focused service interface
- * Dependency Inversion: Depends on abstractions (validator, crypto utils)
  */
 class UserService {
+  /**
+   *
+   */
   constructor() {
     this.cryptoUtils = new CryptoUtils();
   }
 
   /**
    * Create a new user
-   * @param {Object} userData - User data
-   * @returns {Promise<Object>} Created user
+   * @param {object} userData - User data
+   * @returns {Promise<object>} Created user
    */
   async createUser(userData) {
    
@@ -56,8 +54,8 @@ class UserService {
 
   /**
    * Get all users with optional filtering and pagination
-   * @param {Object} options - Query options
-   * @returns {Promise<Object>} Users and pagination info
+   * @param {object} options - Query options
+   * @returns {Promise<object>} Users and pagination info
    */
   async getUsers(options = {}) {
     try {
@@ -76,7 +74,7 @@ class UserService {
         limit
       });
       
-      let users = result.users;
+      let { users } = result;
       const totalCount = result.pagination.total;
 
       // Apply additional filters if needed
@@ -116,7 +114,7 @@ class UserService {
   /**
    * Get user by ID
    * @param {number} userId - User ID
-   * @returns {Promise<Object>} User object
+   * @returns {Promise<object>} User object
    */
   async getUserById(userId) {
     try {
@@ -142,8 +140,8 @@ class UserService {
   /**
    * Update user
    * @param {number} userId - User ID
-   * @param {Object} updateData - Data to update
-   * @returns {Promise<Object>} Updated user
+   * @param {object} updateData - Data to update
+   * @returns {Promise<object>} Updated user
    */
   async updateUser(userId, updateData) {
     try {
@@ -151,7 +149,7 @@ class UserService {
       const existingUser = await this.getUserById(userId);
 
       // If email is being updated, generate new hash and signature
-      let updatedData = { ...updateData };
+      const updatedData = { ...updateData };
       if (updateData.email && updateData.email !== existingUser.email) {
         const signatureData = this.cryptoUtils.signUserEmail(updateData.email);
         updatedData.email_hash = signatureData.emailHash;
@@ -207,7 +205,7 @@ class UserService {
 
   /**
    * Get user statistics
-   * @returns {Promise<Object>} User statistics
+   * @returns {Promise<object>} User statistics
    */
   async getUserStats() {
     try {

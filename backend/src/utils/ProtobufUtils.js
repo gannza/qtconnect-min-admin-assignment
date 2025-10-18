@@ -6,6 +6,9 @@ const { logger } = require('./Logger');
  * Protobuf utilities for serialization and deserialization
  */
 class ProtobufUtils {
+  /**
+   *
+   */
   constructor() {
     this.root = null;
     this.User = null;
@@ -43,7 +46,7 @@ class ProtobufUtils {
 
   /**
    * Serialize a single user to protobuf
-   * @param {Object} user - User object
+   * @param {object} user - User object
    * @returns {Buffer} Serialized protobuf buffer
    */
   serializeUser(user) {
@@ -76,7 +79,7 @@ class ProtobufUtils {
   /**
    * Deserialize a single user from protobuf
    * @param {Buffer} buffer - Protobuf buffer
-   * @returns {Object} User object
+   * @returns {object} User object
    */
   deserializeUser(buffer) {
     if (!this.initialized) {
@@ -145,7 +148,7 @@ class ProtobufUtils {
   /**
    * Deserialize multiple users from protobuf
    * @param {Buffer} buffer - Protobuf buffer
-   * @returns {Object} Object containing users array and metadata
+   * @returns {object} Object containing users array and metadata
    */
   deserializeUserList(buffer) {
     if (!this.initialized) {
@@ -176,9 +179,9 @@ class ProtobufUtils {
 
   /**
    * Validate protobuf message
-   * @param {Object} message - Message to validate
+   * @param {object} message - Message to validate
    * @param {string} messageType - Type of message to validate against
-   * @returns {Object} Validation result
+   * @returns {object} Validation result
    */
   validateMessage(message, messageType) {
     if (!this.initialized) {
@@ -195,7 +198,7 @@ class ProtobufUtils {
       if (error) {
         return {
           valid: false,
-          error: error
+          error
         };
       }
 
@@ -214,7 +217,7 @@ class ProtobufUtils {
 
   /**
    * Get protobuf schema information
-   * @returns {Object} Schema information
+   * @returns {object} Schema information
    */
   getSchemaInfo() {
     if (!this.initialized) {

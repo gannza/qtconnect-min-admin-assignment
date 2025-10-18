@@ -6,19 +6,19 @@ process.env.DB_FILENAME = ':memory:';
 //Set up database connection
 const { database } = require('../database/Database');
 
-beforeAll(async () => {
+beforeAll(async() => {
   await database.initialize();
   await database.migrate();
 //   await database.seed();
 });
 
-afterAll(async () => {
+afterAll(async() => {
   await database.close();
 });
 
 // Clear database between tests
-beforeEach(async () => {
-    const knex = database.getKnex();
-    await knex('users').del();
-  });
+beforeEach(async() => {
+  const knex = database.getKnex();
+  await knex('users').del();
+});
   

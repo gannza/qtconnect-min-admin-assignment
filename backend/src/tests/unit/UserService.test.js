@@ -1,0 +1,326 @@
+const UserService = require('../../services/UserService');
+const UserRepository = require('../../repositories/UserRepository');
+const CryptoUtils = require('../../utils/CryptoUtils');
+const { logger } = require('../../utils/Logger');
+const { createError } = require('../../middleware/ErrorHandler');
+
+// Mock dependencies
+jest.mock('../../repositories/UserRepository');
+jest.mock('../../utils/CryptoUtils');
+jest.mock('../../utils/Logger');
+jest.mock('../../middleware/ErrorHandler');
+
+describe('UserService', () => {
+  let userService;
+  let mockCryptoUtils;
+  let mockUserRepository;
+
+  beforeEach(() => {
+    // Clear all mocks
+    jest.clearAllMocks();
+    
+    // Create fresh instances
+    userService = new UserService();
+    mockCryptoUtils = new CryptoUtils();
+    mockUserRepository = UserRepository;
+    
+    // Setup mocks
+    userService.cryptoUtils = mockCryptoUtils;
+  });
+
+  describe('createUser', () => {
+    it('should create a user successfully', async() => {
+      // Arrange
+      const userData = {
+        email: 'test@example.com',
+        role: 'user',
+        status: 'active'
+      };
+      
+      const mockSignatureData = {
+        emailHash: 'hashed_email',
+        signatures: { signature: 'test_signature' }
+      };
+      
+      const mockUser = {
+        id: 1,
+        email: 'test@example.com',
+        role: 'user',
+        status: 'active',
+        email_hash: 'hashed_email',
+        digital_signature: '{"signature":"test_signature"}'
+      };
+
+      mockCryptoUtils.signUserEmail.mockReturnValue(mockSignatureData);
+      mockUserRepository.create.mockResolvedValue(mockUser);
+
+      // Act
+      const result = await userService.createUser(userData);
+
+      // Assert
+      expect(mockCryptoUtils.signUserEmail).toHaveBeenCalledWith('test@example.com');
+      expect(mockUserRepository.create).toHaveBeenCalledWith({
+        email: 'test@example.com',
+        role: 'user',
+        status: 'active',
+        email_hash: 'hashed_email',
+        digital_signature: '{"signature":"test_signature"}'
+      });
+      expect(result).toEqual(mockUser);
+      expect(logger.info).toHaveBeenCalledWith('User created successfully', {
+        userId: 1,
+        email: 'test@example.com',
+        role: 'user',
+        status: 'active'
+      });
+    });
+
+    it('should handle creation errors', async() => {
+      // Arrange
+      const userData = { email: 'test@example.com' };
+      const error = new Error('Database error');
+      
+      mockCryptoUtils.signUserEmail.mockReturnValue({
+        emailHash: 'hash',
+        signatures: {}
+      });
+      mockUserRepository.create.mockRejectedValue(error);
+
+      // Act & Assert
+      await expect(userService.createUser(userData)).rejects.toThrow('Database error');
+      expect(logger.error).toHaveBeenCalledWith('Failed to create user', error);
+    });
+  });
+
+  describe('getUsers', () => {
+    it('should get users with default pagination', async() => {
+      // Arrange
+      const mockResult = {
+        users: [
+          { id: 1, email: 'user1@example.com', role: 'user', status: 'active' },
+          { id: 2, email: 'user2@example.com', role: 'admin', status: 'active' }
+        ],
+        pagination: { total: 2 }
+      };
+      
+      mockUserRepository.findAllWithPagination.mockResolvedValue(mockResult);
+
+      // Act
+      const result = await userService.getUsers();
+
+      // Assert
+      expect(mockUserRepository.findAllWithPagination).toHaveBeenCalledWith({
+        page: 1,
+        limit: 10
+      });
+      expect(result.users).toHaveLength(2);
+      expect(result.pagination).toEqual({
+        page: 1,
+        limit: 10,
+        total: 2,
+        pages: 1
+      });
+    });
+
+    it('should apply role and status filters', async() => {
+      // Arrange
+      const mockResult = {
+        users: [
+          { id: 1, email: 'user1@example.com', role: 'user', status: 'active' },
+          { id: 2, email: 'user2@example.com', role: 'admin', status: 'active' },
+          { id: 3, email: 'user3@example.com', role: 'user', status: 'inactive' }
+        ],
+        pagination: { total: 3 }
+      };
+      
+      mockUserRepository.findAllWithPagination.mockResolvedValue(mockResult);
+
+      // Act
+      const result = await userService.getUsers({ role: 'user', status: 'active' });
+
+      // Assert
+      expect(result.users).toHaveLength(1);
+      expect(result.users[0].role).toBe('user');
+      expect(result.users[0].status).toBe('active');
+    });
+
+    it('should apply custom sorting', async() => {
+      // Arrange
+      const mockResult = {
+        users: [
+          { id: 1, email: 'user1@example.com', created_at: '2023-01-01' },
+          { id: 2, email: 'user2@example.com', created_at: '2023-01-02' }
+        ],
+        pagination: { total: 2 }
+      };
+      
+      mockUserRepository.findAllWithPagination.mockResolvedValue(mockResult);
+
+      // Act
+      const result = await userService.getUsers({ 
+        sortBy: 'created_at', 
+        sortOrder: 'asc' 
+      });
+
+      // Assert
+      expect(result.users[0].created_at).toBe('2023-01-01');
+      expect(result.users[1].created_at).toBe('2023-01-02');
+    });
+  });
+
+  describe('getUserById', () => {
+    it('should return user when found', async() => {
+      // Arrange
+      const mockUser = { id: 1, email: 'test@example.com' };
+      mockUserRepository.findById.mockResolvedValue(mockUser);
+
+      // Act
+      const result = await userService.getUserById(1);
+
+      // Assert
+      expect(mockUserRepository.findById).toHaveBeenCalledWith(1);
+      expect(result).toEqual(mockUser);
+    });
+
+    it('should throw error when user not found', async() => {
+      // Arrange
+      mockUserRepository.findById.mockResolvedValue(null);
+      const mockError = new Error('User not found');
+      createError.mockReturnValue(mockError);
+
+      // Act & Assert
+      await expect(userService.getUserById(999)).rejects.toThrow('User not found');
+      expect(createError).toHaveBeenCalledWith('User not found', {
+        name: 'NotFoundError',
+        status: 404,
+        type: 'not_found_error',
+        requestInfo: { operation: 'getUserById', userId: 999 }
+      });
+    });
+  });
+
+  describe('updateUser', () => {
+    it('should update user successfully', async() => {
+      // Arrange
+      const existingUser = { id: 1, email: 'old@example.com' };
+      const updateData = { role: 'admin' };
+      const updatedUser = { id: 1, email: 'old@example.com', role: 'admin' };
+
+      jest.spyOn(userService, 'getUserById').mockResolvedValue(existingUser);
+      mockUserRepository.updateById.mockResolvedValue(updatedUser);
+
+      // Act
+      const result = await userService.updateUser(1, updateData);
+
+      // Assert
+      expect(userService.getUserById).toHaveBeenCalledWith(1);
+      expect(mockUserRepository.updateById).toHaveBeenCalledWith(1, updateData);
+      expect(result).toEqual(updatedUser);
+      expect(logger.info).toHaveBeenCalledWith('User updated successfully', {
+        userId: 1,
+        email: 'old@example.com',
+        updatedFields: ['role']
+      });
+    });
+
+    it('should update email hash when email changes', async() => {
+      // Arrange
+      const existingUser = { id: 1, email: 'old@example.com' };
+      const updateData = { email: 'new@example.com' };
+      const mockSignatureData = {
+        emailHash: 'new_hash',
+        signatures: { signature: 'new_signature' }
+      };
+      const updatedUser = { id: 1, email: 'new@example.com' };
+
+      jest.spyOn(userService, 'getUserById').mockResolvedValue(existingUser);
+      mockCryptoUtils.signUserEmail.mockReturnValue(mockSignatureData);
+      mockUserRepository.updateById.mockResolvedValue(updatedUser);
+
+      // Act
+      const result = await userService.updateUser(1, updateData);
+
+      // Assert
+      expect(mockCryptoUtils.signUserEmail).toHaveBeenCalledWith('new@example.com');
+      expect(mockUserRepository.updateById).toHaveBeenCalledWith(1, {
+        email: 'new@example.com',
+        email_hash: 'new_hash',
+        digital_signature: '{"signature":"new_signature"}'
+      });
+    });
+  });
+
+  describe('deleteUser', () => {
+    it('should delete user successfully', async() => {
+      // Arrange
+      const existingUser = { id: 1, email: 'test@example.com' };
+      jest.spyOn(userService, 'getUserById').mockResolvedValue(existingUser);
+      mockUserRepository.deleteById.mockResolvedValue(1);
+
+      // Act
+      const result = await userService.deleteUser(1);
+
+      // Assert
+      expect(userService.getUserById).toHaveBeenCalledWith(1);
+      expect(mockUserRepository.deleteById).toHaveBeenCalledWith(1);
+      expect(result).toBe(true);
+      expect(logger.info).toHaveBeenCalledWith('User deleted successfully', { userId: 1 });
+    });
+
+    it('should throw error when user not found for deletion', async() => {
+      // Arrange
+      jest.spyOn(userService, 'getUserById').mockResolvedValue({ id: 1 });
+      mockUserRepository.deleteById.mockResolvedValue(0);
+      const mockError = new Error('User not found');
+      createError.mockReturnValue(mockError);
+
+      // Act & Assert
+      await expect(userService.deleteUser(1)).rejects.toThrow('User not found');
+    });
+  });
+
+  describe('getUserStats', () => {
+    it('should return user statistics', async() => {
+      // Arrange
+      const mockStats = { total: 10, active: 8, inactive: 2 };
+      mockUserRepository.getUserStats.mockResolvedValue(mockStats);
+
+      // Act
+      const result = await userService.getUserStats();
+
+      // Assert
+      expect(mockUserRepository.getUserStats).toHaveBeenCalled();
+      expect(result).toEqual(mockStats);
+    });
+  });
+
+  describe('getUsersCreatedInLastDays', () => {
+    it('should return users created in last 7 days by default', async() => {
+      // Arrange
+      const mockUsers = [
+        { id: 1, email: 'user1@example.com', created_at: new Date() }
+      ];
+      mockUserRepository.getUsersCreatedInLastDays.mockResolvedValue(mockUsers);
+
+      // Act
+      const result = await userService.getUsersCreatedInLastDays();
+
+      // Assert
+      expect(mockUserRepository.getUsersCreatedInLastDays).toHaveBeenCalledWith(7);
+      expect(result).toEqual(mockUsers);
+    });
+
+    it('should return users created in specified days', async() => {
+      // Arrange
+      const mockUsers = [{ id: 1, email: 'user1@example.com' }];
+      mockUserRepository.getUsersCreatedInLastDays.mockResolvedValue(mockUsers);
+
+      // Act
+      const result = await userService.getUsersCreatedInLastDays(30);
+
+      // Assert
+      expect(mockUserRepository.getUsersCreatedInLastDays).toHaveBeenCalledWith(30);
+      expect(result).toEqual(mockUsers);
+    });
+  });
+});

@@ -4,10 +4,16 @@ const winston = require('winston');
  * Winston logger configuration 
  */
 class Logger {
+  /**
+   *
+   */
   constructor() {
     this.logger = this.createLogger();
   }
 
+  /**
+   *
+   */
   createLogger() {
     const logFormat = winston.format.combine(
       winston.format.timestamp({
@@ -69,7 +75,7 @@ class Logger {
   /**
    * Log an info message
    * @param {string} message - Log message
-   * @param {Object} meta - Additional metadata
+   * @param {object} meta - Additional metadata
    */
   info(message, meta = {}) {
     this.logger.info(message, meta);
@@ -78,7 +84,7 @@ class Logger {
   /**
    * Log a warning message
    * @param {string} message - Log message
-   * @param {Object} meta - Additional metadata
+   * @param {object} meta - Additional metadata
    */
   warn(message, meta = {}) {
     this.logger.warn(message, meta);
@@ -87,7 +93,7 @@ class Logger {
   /**
    * Log an error message
    * @param {string} message - Log message
-   * @param {Error|Object} error - Error object or metadata
+   * @param {Error | object} error - Error object or metadata
    */
   error(message, error = {}) {
     if (error instanceof Error) {
@@ -104,7 +110,7 @@ class Logger {
   /**
    * Log a debug message
    * @param {string} message - Log message
-   * @param {Object} meta - Additional metadata
+   * @param {object} meta - Additional metadata
    */
   debug(message, meta = {}) {
     this.logger.debug(message, meta);
@@ -112,8 +118,8 @@ class Logger {
 
   /**
    * Log HTTP request details
-   * @param {Object} req - Express request object
-   * @param {Object} res - Express response object
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
    * @param {number} responseTime - Response time in milliseconds
    */
   logHttpRequest(req, res, responseTime) {
@@ -138,7 +144,7 @@ class Logger {
    * Log database operation
    * @param {string} operation - Database operation type
    * @param {string} table - Table name
-   * @param {Object} data - Operation data
+   * @param {object} data - Operation data
    * @param {number} duration - Operation duration in milliseconds
    */
   logDatabaseOperation(operation, table, data = {}, duration = null) {
@@ -155,8 +161,8 @@ class Logger {
   /**
    * Log validation error
    * @param {string} entity - Entity being validated
-   * @param {Object} validationResult - Validation result
-   * @param {Object} data - Data that failed validation
+   * @param {object} validationResult - Validation result
+   * @param {object} data - Data that failed validation
    */
   logValidationError(entity, validationResult, data = {}) {
     this.warn(`Validation failed for ${entity}`, {
@@ -169,7 +175,7 @@ class Logger {
   /**
    * Log security event
    * @param {string} event - Security event type
-   * @param {Object} details - Event details
+   * @param {object} details - Event details
    */
   logSecurityEvent(event, details = {}) {
     this.warn(`Security Event: ${event}`, {
@@ -181,8 +187,8 @@ class Logger {
 
   /**
    * Sanitize sensitive data before logging
-   * @param {Object} data - Data to sanitize
-   * @returns {Object} Sanitized data
+   * @param {object} data - Data to sanitize
+   * @returns {object} Sanitized data
    */
   sanitizeData(data) {
     const sensitiveFields = ['password', 'token', 'secret', 'key', 'signature'];

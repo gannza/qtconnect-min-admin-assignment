@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  return knex.schema.createTable('users', function(table) {
+  return knex.schema.createTable('users', (table) => {
     table.increments('id').primary();
     table.string('email', 255).unique().notNullable();
     table.enum('role', ['admin', 'user']).defaultTo('user').notNullable();
