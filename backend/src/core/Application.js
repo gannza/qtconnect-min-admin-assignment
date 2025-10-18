@@ -34,9 +34,6 @@ class Application {
    * Initialize the application
    */
   
-  /**
-   *
-   */
   async initialize() {
 
     try {
@@ -76,6 +73,7 @@ class Application {
   setupRoutes() {
     appRoutes(this.app);
     this.app.use('/health', healthRoutes);
+    this.app.use('/api/users', userRoutes);
   }
 
   /**
