@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package crypto;
+
+message PublicKeyInfo {
+  string publicKey = 1;
+  string algorithm = 2;
+  int32 keySize = 3;
+  string timestamp = 4;
+}
