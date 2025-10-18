@@ -76,7 +76,7 @@ class ErrorHandler {
       return {
         type: 'duplicate_key_error',
         severity: 'low',
-        statusCode: 402,
+        statusCode: 400,
         userMessage: 'Resource already exists (check user email)'
       };
     }
