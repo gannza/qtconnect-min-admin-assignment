@@ -19,6 +19,7 @@ class ErrorHandler {
    * @param req
    * @param res
    * @param next
+   * @param _next
    */
   static handle(err, req, res, _next) {
     // Log the error
