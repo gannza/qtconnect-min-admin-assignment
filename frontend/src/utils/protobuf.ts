@@ -60,16 +60,15 @@ export const decodeProtobufToUsers = async (data: Uint8Array): Promise<User[]> =
     const userList = UserList.toObject(message);
     
     return userList.users.map((user: any) => ({
-      id: user.id,
+      id: user.id, 
       email: user.email,
       role: user.role as 'admin' | 'user',
       status: user.status as 'active' | 'inactive',
-      createdAt: user.created_at,
-      emailHash: user.email_hash,
+      createdAt: user.createdAt,
+      emailHash: user.emailHash,
       signature: user.signature,
     }));
   } catch (error) {
-    console.error('Failed to decode protobuf to users:', error);
     throw error;
   }
 };

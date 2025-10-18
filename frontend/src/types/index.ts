@@ -6,6 +6,7 @@ export interface User {
   createdAt: string;
   emailHash?: string;
   signature?: string;
+  isValid?: boolean;
 }
 
 export interface UserFormData {

@@ -14,6 +14,15 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // For 409 errors, return the error response so we can handle it in components
+    if (error.response?.status === 409) {
+      return Promise.reject(error.response);
+    }
+
+    if (error?.response?.data?.error?.type==="duplicate_key_error") {
+      console.log(error.response.data.error.message);
+      return Promise.reject(new Error(error.response.data.error.message));
+    }
     const message = error.response?.data?.message || error.message || 'An error occurred';
     return Promise.reject(new Error(message));
   }
@@ -21,7 +30,7 @@ api.interceptors.response.use(
 
 export const userApi = {
   getUsers: async (): Promise<ApiResponse<User[]>> => {
-    const response = await api.get('/users');
+    const response = await api.get('/users/export');
     return response.data;
   },
 
@@ -45,12 +54,19 @@ export const userApi = {
   },
 
   exportUsers: async (): Promise<Uint8Array> => {
-    const response = await api.get('/users/export', {
-      responseType: 'arraybuffer',
-    });
+    const response = await api.get('/users/export');
     
-    // Convert ArrayBuffer to Uint8Array for protobuf decoding
-    return new Uint8Array(response.data);
+    // The backend returns JSON with base64-encoded protobuf data
+    const base64Data = response.data.data;
+    
+    // Convert base64 to Uint8Array
+    const binaryString = atob(base64Data);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    
+    return bytes;
   },
 
   getChartData: async (days: number = 7): Promise<ApiResponse<{ date: string; count: number }[]>> => {

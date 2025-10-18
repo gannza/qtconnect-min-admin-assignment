@@ -20,11 +20,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from './ui/dialog';
+import { toast } from '@/hooks/useToast';
 
 interface UserEditFormProps {
   user: User;
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChange: (data: any) => void;
 }
 
 const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
@@ -35,6 +36,7 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
     status: 'active',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (user) {
@@ -51,10 +53,34 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
     setIsSubmitting(true);
 
     try {
-      await dispatch(updateUser({ id: user.id, userData: formData }));
-      onOpenChange(false);
+      const response = await dispatch(updateUser({ id: user.id, userData: formData }));
+      if (response.type.endsWith('/fulfilled') && response.payload) {
+        setErrors({}); // Clear any previous errors
+        onOpenChange({open:false, user:response.payload}); // Close modal on success
+        toast({ 
+          title: 'User updated successfully', 
+          description: 'User updated successfully',
+          variant: 'success'
+        });
+        } else if (response.type.endsWith('/rejected')) {
+          // Don't close modal on error - keep it open to show validation errors
+          onOpenChange({open:true, user:null});
+          setErrors({ email: 'Email already exists' });
+     
+          toast({ 
+            title: 'Update failed', 
+            description: 'Email already exists',
+            variant: 'destructive'
+          });
+        }
     } catch (error) {
-      console.error('Error updating user:', error);
+      // Don't close modal on error - keep it open to show validation errors
+      setErrors({ general: 'An unexpected error occurred' });
+      toast({ 
+        title: 'Update failed', 
+        description: 'An unexpected error occurred',
+        variant: 'destructive'
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -65,10 +91,17 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
       ...prev,
       [field]: value,
     }));
+    // Clear field-specific error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: '',
+      }));
+    }
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={()=>onOpenChange({open:false, user:user})}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit User</DialogTitle>
@@ -77,6 +110,11 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {errors.general && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-sm text-red-600">{errors.general}</p>
+            </div>
+          )}
           <div className="space-y-2">
             <Label htmlFor="edit-email">Email</Label>
             <Input
@@ -86,7 +124,11 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
               onChange={(e) => handleChange('email', e.target.value)}
               placeholder="user@example.com"
               required
+              className={errors.email ? 'border-red-500' : ''}
             />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -122,12 +164,12 @@ const UserEditForm = ({ user, open, onOpenChange }: UserEditFormProps) => {
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button type="button" variant="outline" onClick={() => onOpenChange({open:false, user:user})}>
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Saving...' : 'Save Changes'}
-            </Button>
+            </Button> 
           </DialogFooter>
         </form>
       </DialogContent>

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserFormData, UserStats, ChartData } from '../../types/index';
 import { userApi } from '../api/userApi';
-import { hashEmail, signHash, initializeCryptoKeys } from '../../utils/crypto';
 
 interface UserState {
   users: User[];
@@ -20,43 +19,37 @@ const initialState: UserState = {
 };
 
 // Async thunks
-export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async () => {
-    const response = await userApi.getUsers();
-    return response.data;
-  }
-);
-
 export const createUser = createAsyncThunk(
   'users/createUser',
-  async (userData: UserFormData) => {
-    // Initialize crypto keys if not already done
-    const keys = initializeCryptoKeys();
-    
-    // Hash the email
-    const emailHash = hashEmail(userData.email);
-    
-    // Sign the hash
-    const signature = signHash(emailHash, keys.privateKey);
-    
-    // Add crypto data to user data
-    const userWithCrypto = {
-      ...userData,
-      emailHash,
-      signature,
-    };
-    
-    const response = await userApi.createUser(userWithCrypto);
-    return response.data;
+  async (userData: UserFormData, { rejectWithValue }) => {
+    try {
+      const response = await userApi.createUser(userData);
+      return response.data;
+    } catch (error: any) {
+      // Handle 409 and other validation errors
+      if (error.status === 409 || error.response?.status === 409) {
+        const errorData = error.data || error.response?.data;
+        return rejectWithValue(error || errorData);
+      }
+      return rejectWithValue(error.message || error || 'An error occurred');
+    }
   }
 );
 
 export const updateUser = createAsyncThunk(
   'users/updateUser',
-  async ({ id, userData }: { id: string; userData: UserFormData }) => {
-    const response = await userApi.updateUser(id, userData);
-    return response.data;
+  async ({ id, userData }: { id: string; userData: UserFormData }, { rejectWithValue }) => {
+    try {
+      const response = await userApi.updateUser(id, userData);
+      return response.data;
+    } catch (error: any) {
+      // Handle 409 and other validation errors
+      if (error.status === 409 || error.response?.status === 409) {
+        const errorData = error.data || error.response?.data;
+        return rejectWithValue(error || errorData);
+      }
+      return rejectWithValue(error.message || error || 'An error occurred');
+    }
   }
 );
 
@@ -109,46 +102,28 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch users
-      .addCase(fetchUsers.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = action.payload;
-      })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to fetch users';
-      })
       // Create user
       .addCase(createUser.pending, (state) => {
-        state.loading = true;
         state.error = null;
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.loading = false;
         state.users.push(action.payload);
       })
       .addCase(createUser.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.error.message || 'Failed to create user';
       })
       // Update user
       .addCase(updateUser.pending, (state) => {
-        state.loading = true;
         state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.loading = false;
         const index = state.users.findIndex(user => user.id === action.payload.id);
         if (index !== -1) {
+          action.payload.isValid=true;
           state.users[index] = action.payload;
         }
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.error.message || 'Failed to update user';
       })
       // Delete user
@@ -190,11 +165,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch chart data';
       })
-      // Export users
-      .addCase(exportUsers.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+  
       .addCase(exportUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.users = action.payload;

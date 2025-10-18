@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useAppDispatch } from '../store/hooks';
-import { deleteUser, updateUser } from '../store/slices/userSlice';
-import { User } from '../types';
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { deleteUser } from "../store/slices/userSlice";
+import { User } from "../types";
 import {
   Table,
   TableBody,
@@ -9,9 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../components/ui/table';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
+} from "../components/ui/table";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -19,36 +19,53 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from '../components/ui/dialog';
-import { Edit, Trash2, MoreHorizontal } from 'lucide-react';
-import UserEditForm from './UserEditForm';
+} from "../components/ui/dialog";
+import { Edit, Trash2 } from "lucide-react";
+import { toast } from "../hooks/useToast";
 
 interface UsersTableProps {
   users: User[];
+  onUserUpdated?: () => void;
+  setEditingUser?: (user: User) => void;
 }
 
-const UsersTable = ({ users }: UsersTableProps) => {
+const UsersTable = ({
+  users,
+  onUserUpdated,
+  setEditingUser,
+}: UsersTableProps) => {
   const dispatch = useAppDispatch();
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
-
+  const [updatedUsers, setUpdatedUsers] = useState<User[]>(users);
   const handleDelete = async (user: User) => {
     setUserToDelete(user);
     setDeleteDialogOpen(true);
   };
+
+  useEffect(() => {
+    setUpdatedUsers(users);
+  }, [users]);
 
   const confirmDelete = async () => {
     if (userToDelete) {
       await dispatch(deleteUser(userToDelete.id));
       setDeleteDialogOpen(false);
       setUserToDelete(null);
+      if (onUserUpdated) {
+        onUserUpdated();
+      }
+      toast({
+        title: "User deleted successfully",
+        description: "User deleted successfully",
+        variant: "success",
+      });
     }
   };
 
   const getStatusBadge = (status: string) => {
-    return status === 'active' ? (
+    return status === "active" ? (
       <Badge variant="default" className="bg-green-100 text-green-800">
         Active
       </Badge>
@@ -60,13 +77,19 @@ const UsersTable = ({ users }: UsersTableProps) => {
   };
 
   const getRoleBadge = (role: string) => {
-    return role === 'admin' ? (
+    return role === "admin" ? (
       <Badge variant="destructive">Admin</Badge>
     ) : (
       <Badge variant="outline">User</Badge>
     );
   };
-
+  const getEmailVerifiedBadge = (isValid: boolean) => {
+    return isValid ? (
+      <Badge className="bg-green-100 text-green-800">Verified</Badge>
+    ) : (
+      <Badge variant="destructive">Invalid</Badge>
+    );
+  };
   return (
     <>
       <div className="rounded-md border">
@@ -81,18 +104,25 @@ const UsersTable = ({ users }: UsersTableProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.length === 0 ? (
+            {updatedUsers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                <TableCell
+                  colSpan={5}
+                  className="text-center py-8 text-muted-foreground"
+                >
                   No users found
                 </TableCell>
               </TableRow>
             ) : (
-              users.map((user) => (
+              updatedUsers.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="font-medium">{user.email}</TableCell>
+                  <TableCell className="font-medium pr-1">
+                    <span className="mr-2">{user.email}</span>{" "}
+                    {getEmailVerifiedBadge(user.isValid || false)}
+                  </TableCell>
                   <TableCell>{getRoleBadge(user.role)}</TableCell>
                   <TableCell>{getStatusBadge(user.status)}</TableCell>
+
                   <TableCell>
                     {new Date(user.createdAt).toLocaleDateString()}
                   </TableCell>
@@ -101,7 +131,7 @@ const UsersTable = ({ users }: UsersTableProps) => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => setEditingUser(user)}
+                        onClick={() => setEditingUser && setEditingUser(user)}
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
@@ -122,26 +152,21 @@ const UsersTable = ({ users }: UsersTableProps) => {
         </Table>
       </div>
 
-      {/* Edit User Dialog */}
-      {editingUser && (
-        <UserEditForm
-          user={editingUser}
-          open={!!editingUser}
-          onOpenChange={(open) => !open && setEditingUser(null)}
-        />
-      )}
-
       {/* Delete Confirmation Dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete User</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete user "{userToDelete?.email}"? This action cannot be undone.
+              Are you sure you want to delete user "{userToDelete?.email}"? This
+              action cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setDeleteDialogOpen(false)}
+            >
               Cancel
             </Button>
             <Button variant="destructive" onClick={confirmDelete}>
