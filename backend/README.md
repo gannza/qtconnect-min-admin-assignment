@@ -371,9 +371,10 @@ LOG_LEVEL=debug npm run dev
 6. Run tests: `npm test`
 7. Submit a pull request
 
+
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Author
 

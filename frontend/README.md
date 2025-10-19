@@ -184,6 +184,10 @@ npm run build
 - **Performance**: Lazy loading for route components
 - **Error Boundaries**: Graceful error handling throughout the app
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+**GANZA Jean Respice** - Full Stack Developer
