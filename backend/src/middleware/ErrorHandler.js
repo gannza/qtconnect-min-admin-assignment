@@ -155,7 +155,6 @@ class ErrorHandler {
         code: err.code
       };
     }
-
     // Include validation errors if available
     if (err.validationResult && !err.validationResult.isValid) {
       response.error.validation = err.validationResult.toJSON();

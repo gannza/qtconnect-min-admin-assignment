@@ -46,16 +46,18 @@ const Users = () => {
           try {
             // Decode the Base64-encoded signature JSON
             const decodedSignature = decodeSignature(user.signature);
-
+        
             if (!decodedSignature) {
               continue;
             }
-
+            // console.log( user.email,
+            //   decodedSignature);
             // Verify using the decoded signature data (includes embedded public key)
             const isValid = await verifyDecodedSignature(
               user.email,
               decodedSignature
             );
+            
              if (isValid) results.push({ ...user, isValid, isEditable: true });
           } catch (error) {
             // Skip invalid signatures

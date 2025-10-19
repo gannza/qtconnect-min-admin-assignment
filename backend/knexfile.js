@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    client: process.env.DB_CLIENT || 'sqlite3',
+    client: process.env.DB_CLIENT || 'better-sqlite3',
     connection: {
       filename: process.env.DB_FILENAME || './database.sqlite'
     },
@@ -16,7 +16,7 @@ module.exports = {
   },
   
   test: {
-    client: 'sqlite3',
+    client: 'better-sqlite3',
     connection: {
       filename: ':memory:'
     },
@@ -30,7 +30,7 @@ module.exports = {
   },
   
   production: {
-    client: process.env.DB_CLIENT || 'sqlite3',
+    client: process.env.DB_CLIENT || 'better-sqlite3',
     connection: {
       filename: process.env.DB_FILENAME || './database.sqlite'
     },

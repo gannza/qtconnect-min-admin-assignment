@@ -2086,3 +2086,227 @@ UniqueViolationError: insert into `users` (`createdAt`, `email`, `emailHash`, `r
     "email"
   ]
 }
+2025-10-19 08:32:52 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 14:08:00 [ERROR]: Failed to update user
+UniqueViolationError: update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.updateUser (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:134:20)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:49:20
+{
+  "error": "update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email",
+  "name": "UniqueViolationError",
+  "nativeError": {
+    "errno": 19,
+    "code": "SQLITE_CONSTRAINT"
+  },
+  "client": "sqlite",
+  "table": "users",
+  "columns": [
+    "email"
+  ]
+}
+2025-10-19 14:08:00 [ERROR]: Error occurred
+UniqueViolationError: update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.updateUser (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:134:20)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:49:20
+{
+  "error": "update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email",
+  "name": "UniqueViolationError",
+  "nativeError": {
+    "errno": 19,
+    "code": "SQLITE_CONSTRAINT"
+  },
+  "client": "sqlite",
+  "table": "users",
+  "columns": [
+    "email"
+  ]
+}

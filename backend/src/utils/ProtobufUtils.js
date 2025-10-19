@@ -76,6 +76,7 @@ class ProtobufUtils {
     }
   }
 
+  
   /**
    * Deserialize a single user from protobuf
    * @param {Buffer} buffer - Protobuf buffer

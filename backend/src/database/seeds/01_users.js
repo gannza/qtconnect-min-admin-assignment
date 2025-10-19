@@ -1,4 +1,5 @@
 const CryptoUtils = require('../../utils/CryptoUtils');
+const { logger } = require('../../utils/Logger');
 
 /**
  * @param { import("knex").Knex } knex
@@ -66,13 +67,31 @@ exports.seed = async function(knex) {
     }
   ];
 
+  // Generate dates for the last 7 days
+  const generateDateForUser = (index) => {
+    const now = new Date();
+    const daysAgo = index % 7; // Spread across 7 days
+    const userDate = new Date(now);
+    userDate.setDate(now.getDate() - daysAgo);
+    
+    // Add some random hours and minutes for variety
+    const randomHours = Math.floor(Math.random() * 24);
+    const randomMinutes = Math.floor(Math.random() * 60);
+    userDate.setHours(randomHours, randomMinutes, 0, 0);
+    
+    return userDate.toISOString();
+  };
+
   // Process users and generate crypto signatures
-  const processedUsers = users.map(user => {
+  const processedUsers = users.map((user, index) => {
     try {
       const signatureData = cryptoUtils.signUserEmail(user.email);
       
       // Encode the signature for storage (Base64 encoding)
       const encodedSignature = Buffer.from(JSON.stringify(signatureData.signature)).toString('base64');
+      
+      const createdAt = generateDateForUser(index);
+      const updatedAt = createdAt; // Same as created for seed data
       
       return {
         email: user.email,
@@ -80,20 +99,23 @@ exports.seed = async function(knex) {
         status: user.status,
         emailHash: signatureData.emailHash,
         signature: encodedSignature,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        createdAt,
+        updatedAt
       };
     } catch (error) {
       logger.error('Failed to generate crypto signature for user', error);
       // Fallback without crypto signature
+      const createdAt = generateDateForUser(index);
+      const updatedAt = createdAt;
+      
       return {
         email: user.email,
         role: user.role,
         status: user.status,
         emailHash: null,
         signature: null,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        createdAt,
+        updatedAt
       };
     }
   });

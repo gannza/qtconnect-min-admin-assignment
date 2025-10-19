@@ -1,0 +1,42 @@
+# Ignore Node dependencies (they will be installed inside Docker)
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Ignore local SQLite databases (if you’re mounting ./data as a volume)
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Environment files
+.env.local
+.env.development
+.env.test
+.env.*
+
+# Build artifacts
+dist
+build
+coverage
+*.log
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode
+.idea
+*.swp
+
+# Git files
+.git
+.gitignore
+
+# Temporary files
+tmp
+temp
+*.tmp

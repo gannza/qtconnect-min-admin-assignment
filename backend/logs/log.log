@@ -6176,3 +6176,632 @@ UniqueViolationError: insert into `users` (`createdAt`, `email`, `emailHash`, `r
 2025-10-18 21:42:10 [INFO]: CryptoUtils initialized successfully
 2025-10-18 21:42:10 [INFO]: Protobuf definitions loaded successfully
 2025-10-18 21:42:10 [INFO]: Server running on http://localhost:9090
+2025-10-19 08:31:26 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 08:31:26 [INFO]: Database initialized successfully
+2025-10-19 08:31:26 [INFO]: Loaded existing RSA keys
+2025-10-19 08:31:26 [INFO]: KeyManager initialized successfully
+2025-10-19 08:31:26 [INFO]: CryptoUtils initialized successfully
+2025-10-19 08:31:27 [INFO]: Server running on http://localhost:3000
+2025-10-19 08:32:52 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.660' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [INFO]: ::1 - - [19/Oct/2025:06:32:52 +0000] "GET /api/users/stats HTTP/1.1" 500 420 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:32:52 [INFO]: ::1 - - [19/Oct/2025:06:32:52 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 500 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:32:52 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:32:52 [INFO]: ::1 - - [19/Oct/2025:06:32:52 +0000] "GET /api/users/stats HTTP/1.1" 500 420 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:32:52 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:32:52.733' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:32:52 [INFO]: ::1 - - [19/Oct/2025:06:32:52 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 500 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:33:45 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [INFO]: ::1 - - [19/Oct/2025:06:33:45 +0000] "GET /api/users/stats HTTP/1.1" 500 420 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:33:45 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.681' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [INFO]: ::1 - - [19/Oct/2025:06:33:45 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 500 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:33:45 [ERROR]: Failed to get user stats
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+Error: select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users
+{
+  "error": "select count(*) as `count` from (select `users`.* from `users`) as `temp` - SQLITE_ERROR: no such table: users",
+  "errno": 1,
+  "code": "SQLITE_ERROR"
+}
+2025-10-19 08:33:45 [INFO]: ::1 - - [19/Oct/2025:06:33:45 +0000] "GET /api/users/stats HTTP/1.1" 500 420 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:33:45 [ERROR]: Failed to get users created in last days
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [ERROR]: Error occurred
+DBError: select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.getUsersCreatedInLastDays (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:202:21)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:121:21
+{
+  "error": "select `users`.* from `users` where `createdAt` >= '2025-10-12 08:33:45.707' order by `createdAt` desc - SQLITE_ERROR: no such table: users",
+  "name": "DBError",
+  "nativeError": {
+    "errno": 1,
+    "code": "SQLITE_ERROR"
+  },
+  "client": "sqlite"
+}
+2025-10-19 08:33:45 [INFO]: ::1 - - [19/Oct/2025:06:33:45 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 500 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:02 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 08:34:18 [INFO]: Loaded existing RSA keys
+2025-10-19 08:34:18 [INFO]: KeyManager initialized successfully
+2025-10-19 08:34:24 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 08:34:24 [INFO]: Database initialized successfully
+2025-10-19 08:34:24 [INFO]: Loaded existing RSA keys
+2025-10-19 08:34:24 [INFO]: KeyManager initialized successfully
+2025-10-19 08:34:24 [INFO]: CryptoUtils initialized successfully
+2025-10-19 08:34:24 [INFO]: Server running on http://localhost:3000
+2025-10-19 08:34:26 [INFO]: ::1 - - [19/Oct/2025:06:34:26 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 200 296 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:26 [INFO]: ::1 - - [19/Oct/2025:06:34:26 +0000] "GET /api/users/stats HTTP/1.1" 200 134 "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:26 [INFO]: ::1 - - [19/Oct/2025:06:34:26 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:26 [INFO]: ::1 - - [19/Oct/2025:06:34:26 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://172.27.10.2:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:30 [INFO]: ::1 - - [19/Oct/2025:06:34:30 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 08:34:30 [INFO]: ::1 - - [19/Oct/2025:06:34:30 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 09:24:05 [INFO]: ::1 - - [19/Oct/2025:07:24:05 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 09:24:05 [INFO]: ::1 - - [19/Oct/2025:07:24:05 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 09:34:18 [INFO]: ::1 - - [19/Oct/2025:07:34:18 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 09:34:18 [INFO]: ::1 - - [19/Oct/2025:07:34:18 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 09:43:26 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 10:48:12 [INFO]: Database initialized successfully
+2025-10-19 10:48:12 [INFO]: Loaded existing RSA keys
+2025-10-19 10:48:12 [INFO]: KeyManager initialized successfully
+2025-10-19 10:48:12 [INFO]: CryptoUtils initialized successfully
+2025-10-19 10:48:12 [INFO]: Server running on http://localhost:3000
+2025-10-19 10:48:12 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 10:48:46 [INFO]: ::1 - - [19/Oct/2025:08:48:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 10:48:46 [INFO]: ::1 - - [19/Oct/2025:08:48:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://172.27.10.2:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 10:48:54 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 10:48:54 [INFO]: Server closed
+2025-10-19 13:07:43 [INFO]: Database initialized successfully
+2025-10-19 13:07:43 [INFO]: Loaded existing RSA keys
+2025-10-19 13:07:43 [INFO]: KeyManager initialized successfully
+2025-10-19 13:07:43 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:07:43 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:07:43 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:09:09 [INFO]: ::1 - - [19/Oct/2025:11:09:09 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:09 [INFO]: ::1 - - [19/Oct/2025:11:09:09 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:09 [INFO]: ::1 - - [19/Oct/2025:11:09:09 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:09 [INFO]: ::1 - - [19/Oct/2025:11:09:09 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:13 [INFO]: ::1 - - [19/Oct/2025:11:09:13 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:13 [INFO]: ::1 - - [19/Oct/2025:11:09:13 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:22 [INFO]: ::1 - - [19/Oct/2025:11:09:22 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:22 [INFO]: ::1 - - [19/Oct/2025:11:09:22 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:41 [INFO]: ::1 - - [19/Oct/2025:11:09:41 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:41 [INFO]: ::1 - - [19/Oct/2025:11:09:41 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:41 [INFO]: ::1 - - [19/Oct/2025:11:09:41 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:41 [INFO]: ::1 - - [19/Oct/2025:11:09:41 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:46 [INFO]: ::1 - - [19/Oct/2025:11:09:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:09:46 [INFO]: ::1 - - [19/Oct/2025:11:09:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:10:38 [INFO]: ::1 - - [19/Oct/2025:11:10:38 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:10:38 [INFO]: ::1 - - [19/Oct/2025:11:10:38 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:10:50 [INFO]: ::1 - - [19/Oct/2025:11:10:50 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:10:50 [INFO]: ::1 - - [19/Oct/2025:11:10:50 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:00 [INFO]: Database initialized successfully
+2025-10-19 13:11:00 [INFO]: Loaded existing RSA keys
+2025-10-19 13:11:00 [INFO]: KeyManager initialized successfully
+2025-10-19 13:11:00 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:11:01 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:11:01 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:11:52 [INFO]: ::1 - - [19/Oct/2025:11:11:52 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:52 [INFO]: ::1 - - [19/Oct/2025:11:11:52 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:57 [INFO]: ::1 - - [19/Oct/2025:11:11:57 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:57 [INFO]: ::1 - - [19/Oct/2025:11:11:57 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:57 [INFO]: ::1 - - [19/Oct/2025:11:11:57 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:57 [INFO]: ::1 - - [19/Oct/2025:11:11:57 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:58 [INFO]: ::1 - - [19/Oct/2025:11:11:58 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:11:58 [INFO]: ::1 - - [19/Oct/2025:11:11:58 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:12:37 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 13:15:23 [INFO]: Database initialized successfully
+2025-10-19 13:15:23 [INFO]: Loaded existing RSA keys
+2025-10-19 13:15:23 [INFO]: KeyManager initialized successfully
+2025-10-19 13:15:23 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:15:23 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:15:23 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:15:26 [INFO]: ::1 - - [19/Oct/2025:11:15:26 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:26 [INFO]: ::1 - - [19/Oct/2025:11:15:26 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:29 [INFO]: ::1 - - [19/Oct/2025:11:15:29 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:29 [INFO]: ::1 - - [19/Oct/2025:11:15:29 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:37 [INFO]: ::1 - - [19/Oct/2025:11:15:37 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:37 [INFO]: ::1 - - [19/Oct/2025:11:15:37 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:37 [INFO]: ::1 - - [19/Oct/2025:11:15:37 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:37 [INFO]: ::1 - - [19/Oct/2025:11:15:37 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:40 [INFO]: ::1 - - [19/Oct/2025:11:15:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:15:40 [INFO]: ::1 - - [19/Oct/2025:11:15:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:16:31 [INFO]: ::1 - - [19/Oct/2025:11:16:31 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:16:53 [INFO]: ::1 - - [19/Oct/2025:11:16:53 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:17:18 [INFO]: ::1 - - [19/Oct/2025:11:17:18 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:19:42 [INFO]: ::1 - - [19/Oct/2025:11:19:42 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:19:52 [INFO]: ::1 - - [19/Oct/2025:11:19:52 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:20:36 [INFO]: ::1 - - [19/Oct/2025:11:20:36 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:20:37 [INFO]: ::1 - - [19/Oct/2025:11:20:37 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:20:40 [INFO]: ::1 - - [19/Oct/2025:11:20:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:20:40 [INFO]: ::1 - - [19/Oct/2025:11:20:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:21:35 [INFO]: ::1 - - [19/Oct/2025:11:21:35 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:21:40 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/export",
+  "method": "GET"
+}
+2025-10-19 13:21:40 [INFO]: ::1 - - [19/Oct/2025:11:21:40 +0000] "GET /api/users/export HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:21:40 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/export",
+  "method": "GET"
+}
+2025-10-19 13:21:40 [INFO]: ::1 - - [19/Oct/2025:11:21:40 +0000] "GET /api/users/export HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:21:46 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 13:21:53 [INFO]: Database initialized successfully
+2025-10-19 13:21:53 [INFO]: Loaded existing RSA keys
+2025-10-19 13:21:53 [INFO]: KeyManager initialized successfully
+2025-10-19 13:21:53 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:21:54 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:21:54 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:23:04 [INFO]: ::1 - - [19/Oct/2025:11:23:04 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:23:24 [INFO]: ::1 - - [19/Oct/2025:11:23:24 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:23:24 [INFO]: ::1 - - [19/Oct/2025:11:23:24 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:23:42 [INFO]: ::1 - - [19/Oct/2025:11:23:42 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:24:27 [INFO]: ::1 - - [19/Oct/2025:11:24:27 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:24:27 [INFO]: ::1 - - [19/Oct/2025:11:24:27 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:25:13 [INFO]: ::1 - - [19/Oct/2025:11:25:13 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:26:52 [INFO]: ::1 - - [19/Oct/2025:11:26:52 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:26:57 [INFO]: ::1 - - [19/Oct/2025:11:26:57 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:27:25 [INFO]: ::1 - - [19/Oct/2025:11:27:25 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:27:56 [INFO]: ::1 - - [19/Oct/2025:11:27:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:28:14 [INFO]: ::1 - - [19/Oct/2025:11:28:14 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:28:33 [INFO]: ::1 - - [19/Oct/2025:11:28:33 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:28:56 [INFO]: ::1 - - [19/Oct/2025:11:28:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:28:56 [INFO]: ::1 - - [19/Oct/2025:11:28:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:30:46 [INFO]: ::1 - - [19/Oct/2025:11:30:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:30:46 [INFO]: ::1 - - [19/Oct/2025:11:30:46 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:31:17 [INFO]: ::1 - - [19/Oct/2025:11:31:17 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:46:30 [INFO]: ::1 - - [19/Oct/2025:11:46:30 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:48:55 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 13:50:14 [INFO]: Loaded existing RSA keys
+2025-10-19 13:50:14 [INFO]: KeyManager initialized successfully
+2025-10-19 13:50:35 [INFO]: Database initialized successfully
+2025-10-19 13:50:35 [INFO]: Loaded existing RSA keys
+2025-10-19 13:50:35 [INFO]: KeyManager initialized successfully
+2025-10-19 13:50:35 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:50:35 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:50:35 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:50:40 [INFO]: ::1 - - [19/Oct/2025:11:50:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:50:40 [INFO]: ::1 - - [19/Oct/2025:11:50:40 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:52:09 [INFO]: Database initialized successfully
+2025-10-19 13:52:09 [INFO]: Loaded existing RSA keys
+2025-10-19 13:52:09 [INFO]: KeyManager initialized successfully
+2025-10-19 13:52:09 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:52:09 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:52:09 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:53:36 [INFO]: ::1 - - [19/Oct/2025:11:53:36 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:53:36 [INFO]: ::1 - - [19/Oct/2025:11:53:36 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:53:50 [INFO]: ::1 - - [19/Oct/2025:11:53:50 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:53:53 [INFO]: ::1 - - [19/Oct/2025:11:53:53 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:53:53 [INFO]: ::1 - - [19/Oct/2025:11:53:53 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:54:04 [INFO]: ::1 - - [19/Oct/2025:11:54:04 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:54:13 [INFO]: ::1 - - [19/Oct/2025:11:54:13 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:54:13 [INFO]: ::1 - - [19/Oct/2025:11:54:13 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:54:41 [INFO]: ::1 - - [19/Oct/2025:11:54:41 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:54:59 [INFO]: ::1 - - [19/Oct/2025:11:54:59 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:55:04 [INFO]: ::1 - - [19/Oct/2025:11:55:04 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:55:04 [INFO]: ::1 - - [19/Oct/2025:11:55:04 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:55:56 [INFO]: ::1 - - [19/Oct/2025:11:55:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:55:56 [INFO]: ::1 - - [19/Oct/2025:11:55:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:56:48 [INFO]: ::1 - - [19/Oct/2025:11:56:48 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:56:51 [INFO]: ::1 - - [19/Oct/2025:11:56:51 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:56:54 [INFO]: ::1 - - [19/Oct/2025:11:56:54 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:56:56 [INFO]: ::1 - - [19/Oct/2025:11:56:56 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:57:04 [INFO]: ::1 - - [19/Oct/2025:11:57:04 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:57:28 [INFO]: ::1 - - [19/Oct/2025:11:57:28 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:57:28 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/export",
+  "method": "GET"
+}
+2025-10-19 13:57:28 [INFO]: ::1 - - [19/Oct/2025:11:57:28 +0000] "GET /api/users/export HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:57:37 [INFO]: Received shutdown signal, closing server gracefully...
+2025-10-19 13:57:43 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 13:57:43 [INFO]: Database initialized successfully
+2025-10-19 13:57:44 [INFO]: Loaded existing RSA keys
+2025-10-19 13:57:44 [INFO]: KeyManager initialized successfully
+2025-10-19 13:57:44 [INFO]: CryptoUtils initialized successfully
+2025-10-19 13:57:44 [INFO]: Server running on http://localhost:3000
+2025-10-19 13:59:21 [INFO]: ::1 - - [19/Oct/2025:11:59:21 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:28 [INFO]: ::1 - - [19/Oct/2025:11:59:28 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:30 [INFO]: ::1 - - [19/Oct/2025:11:59:30 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:33 [INFO]: ::1 - - [19/Oct/2025:11:59:33 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:34 [INFO]: ::1 - - [19/Oct/2025:11:59:34 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:36 [INFO]: ::1 - - [19/Oct/2025:11:59:36 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:47 [INFO]: ::1 - - [19/Oct/2025:11:59:47 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 13:59:48 [INFO]: ::1 - - [19/Oct/2025:11:59:47 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:03:38 [INFO]: ::1 - - [19/Oct/2025:12:03:38 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:03:57 [INFO]: ::1 - - [19/Oct/2025:12:03:57 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:10 [INFO]: ::1 - - [19/Oct/2025:12:04:10 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:10 [INFO]: ::1 - - [19/Oct/2025:12:04:10 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:32 [INFO]: ::1 - - [19/Oct/2025:12:04:32 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:43 [INFO]: ::1 - - [19/Oct/2025:12:04:43 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:50 [INFO]: ::1 - - [19/Oct/2025:12:04:50 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:53 [INFO]: ::1 - - [19/Oct/2025:12:04:53 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:58 [INFO]: ::1 - - [19/Oct/2025:12:04:58 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:04:58 [INFO]: ::1 - - [19/Oct/2025:12:04:58 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:05:17 [INFO]: Loaded existing RSA keys
+2025-10-19 14:05:17 [INFO]: KeyManager initialized successfully
+2025-10-19 14:05:17 [INFO]: User created successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "role": "user",
+  "status": "active"
+}
+2025-10-19 14:05:17 [INFO]: ::1 - - [19/Oct/2025:12:05:17 +0000] "POST /api/users HTTP/1.1" 201 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:05:17 [INFO]: ::1 - - [19/Oct/2025:12:05:17 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:05:25 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/11",
+  "method": "PUT"
+}
+2025-10-19 14:05:25 [INFO]: ::1 - - [19/Oct/2025:12:05:25 +0000] "PUT /api/users/11 HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:05:34 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/11",
+  "method": "PUT"
+}
+2025-10-19 14:05:34 [INFO]: ::1 - - [19/Oct/2025:12:05:34 +0000] "PUT /api/users/11 HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:05:40 [WARN]: Security Event: strict_rate_limit_exceeded
+{
+  "event": "strict_rate_limit_exceeded",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "url": "/11",
+  "method": "PUT"
+}
+2025-10-19 14:05:40 [INFO]: ::1 - - [19/Oct/2025:12:05:40 +0000] "PUT /api/users/11 HTTP/1.1" 429 85 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:06:47 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:06:47 [INFO]: Database initialized successfully
+2025-10-19 14:06:47 [INFO]: Loaded existing RSA keys
+2025-10-19 14:06:47 [INFO]: KeyManager initialized successfully
+2025-10-19 14:06:47 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:06:47 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:06:47 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:06:47 [INFO]: ::1 - - [19/Oct/2025:12:06:47 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:06:51 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:06:51 [INFO]: ::1 - - [19/Oct/2025:12:06:51 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:06:57 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:06:57 [INFO]: Database initialized successfully
+2025-10-19 14:06:57 [INFO]: Loaded existing RSA keys
+2025-10-19 14:06:57 [INFO]: KeyManager initialized successfully
+2025-10-19 14:06:57 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:06:57 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:07:37 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:07:37 [INFO]: ::1 - - [19/Oct/2025:12:07:37 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:07:45 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:07:45 [INFO]: Database initialized successfully
+2025-10-19 14:07:45 [INFO]: Loaded existing RSA keys
+2025-10-19 14:07:45 [INFO]: KeyManager initialized successfully
+2025-10-19 14:07:45 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:07:45 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:07:48 [INFO]: ::1 - - [19/Oct/2025:12:07:48 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:07:48 [INFO]: ::1 - - [19/Oct/2025:12:07:48 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:07:53 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:07:53 [INFO]: ::1 - - [19/Oct/2025:12:07:53 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:00 [INFO]: Loaded existing RSA keys
+2025-10-19 14:08:00 [INFO]: KeyManager initialized successfully
+2025-10-19 14:08:00 [ERROR]: Failed to update user
+UniqueViolationError: update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.updateUser (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:134:20)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:49:20
+{
+  "error": "update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email",
+  "name": "UniqueViolationError",
+  "nativeError": {
+    "errno": 19,
+    "code": "SQLITE_CONSTRAINT"
+  },
+  "client": "sqlite",
+  "table": "users",
+  "columns": [
+    "email"
+  ]
+}
+2025-10-19 14:08:00 [ERROR]: Error occurred
+UniqueViolationError: update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email
+    at wrapError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\db-errors\lib\dbErrors.js:19:14)
+    at handleExecuteError (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:1140:32)
+    at QueryBuilder.execute (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\node_modules\objection\lib\queryBuilder\QueryBuilder.js:449:20)
+    at async UserService.updateUser (C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\services\UserService.js:134:20)
+    at async C:\Users\Ganza\Documents\clientApp\qtconnect-assignments\backend\src\controllers\UserController.js:49:20
+{
+  "error": "update `users` set `email` = 'grace.taylor@example.com', `role` = 'user', `status` = 'active', `emailHash` = '8856193981f12639a20470b569d13906ee67aa9cce356f1764d90b94b8558af0fa3f314653381a318d956e5455ccceea', `signature` = 'eyJzaWduYXR1cmUiOiJ5VUkxUlFGQmJwd041dUphS21ScEM1ekRMU1lQMzloY1MzU2JraUxIUjJzcnlUMkF4MEtRNU43ZlNrajd4bUUyNzdaOTY0TWExTG5oQ05BdWx5RGx1amk0QXRiUllhQW53SmdkNUdtNG1TSXAvS3dPbkNmSCtqVkE1Smp3eExhVGFvN2FuTUdubUU5R1VPT21OWGVObTQ4Mk5xT3FZR1Jxd1dGY3IyeXZUdkhBSFRKVnNObXpsWXNiS2JMOGxFb1dzUTh6TllPTkZWR1F5SFFIckliQ0NiUVhxSkdINTA2dU9LMXdlQmxrQVlWYURFa01QdVdxRHFERENpcWdRNDN5a1ArYTgyeUo0N1JLL2I4MXhBNTY5c2VWMTdPRHNXUURacGt2aldVa3RlYXhWV1c0VGplczRTVWpxdXBrUGg3UWJSby8wbEdaRVlpR21CYW4wZEc5SXc9PSIsInB1YmxpY0tleSI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTZEWFdHaFZCUTVNUE9kNzJHbzRjXG5aT0pTVDZjTnRGd1lVQWkvTy9MMklUbDh0YXRYQmh4QWlwYWJZWEZ5akxJZlpzR2tNdlVOeDliQit1dzlNOFZYXG5BSGZ0RW9taU9QcVdYa21wWHFSOU5IN0oyVkk3ek0yaEgxbEhYVzEvaFpsSko0Q2VlZFUwNE9rdUtqeE5ya09mXG5LWjJFWUNxMC9Wb2plYnZOYndmYVBBQytZaW94eFFmNW15TEdTN1k2NDZaUlJzaXZhUWh1V3R1NTRJY0cwSHpPXG5uek5lM0czK1BMK0p1dGowNzRpUEFHSEplNnVBcjJFVTU0L2xkMkdOMVZua29RVDRXUDZoMXJ5SEl0K3ZXRzhLXG5MUTdlQVdMM25GR1hYeUxXR2t0YjZOQ0pFaVA1UDRleUU4a1hDalBrS2tna2p1YlBYTWUvRDFFUllVd25tMFg2XG5NUUlEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJhbGdvcml0aG0iOiJSU0EtU0hBMzg0Iiwia2V5U2l6ZSI6MjA0OCwiaGFzaEFsZ29yaXRobSI6IlNIQS0zODQifQ==', `updatedAt` = '2025-10-19T12:08:00.907Z' where `users`.`id` = '11' - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email",
+  "name": "UniqueViolationError",
+  "nativeError": {
+    "errno": 19,
+    "code": "SQLITE_CONSTRAINT"
+  },
+  "client": "sqlite",
+  "table": "users",
+  "columns": [
+    "email"
+  ]
+}
+2025-10-19 14:08:01 [INFO]: ::1 - - [19/Oct/2025:12:08:00 +0000] "PUT /api/users/11 HTTP/1.1" 400 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:06 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:08:06 [INFO]: ::1 - - [19/Oct/2025:12:08:06 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:17 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:08:17 [INFO]: Database initialized successfully
+2025-10-19 14:08:17 [INFO]: Loaded existing RSA keys
+2025-10-19 14:08:17 [INFO]: KeyManager initialized successfully
+2025-10-19 14:08:17 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:08:17 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:08:20 [INFO]: ::1 - - [19/Oct/2025:12:08:20 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:20 [INFO]: ::1 - - [19/Oct/2025:12:08:20 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:25 [INFO]: User updated successfully
+{
+  "userId": 11,
+  "email": "respinho2014@gmail.com",
+  "updatedFields": [
+    "email",
+    "role",
+    "status"
+  ]
+}
+2025-10-19 14:08:25 [INFO]: ::1 - - [19/Oct/2025:12:08:25 +0000] "PUT /api/users/11 HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:30 [INFO]: User deleted successfully
+{
+  "userId": "11"
+}
+2025-10-19 14:08:30 [INFO]: ::1 - - [19/Oct/2025:12:08:30 +0000] "DELETE /api/users/11 HTTP/1.1" 200 54 "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:08:30 [INFO]: ::1 - - [19/Oct/2025:12:08:30 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:09:20 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:09:20 [INFO]: Database initialized successfully
+2025-10-19 14:09:20 [INFO]: Loaded existing RSA keys
+2025-10-19 14:09:20 [INFO]: KeyManager initialized successfully
+2025-10-19 14:09:20 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:09:20 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:10:47 [INFO]: Loaded existing RSA keys
+2025-10-19 14:10:47 [INFO]: KeyManager initialized successfully
+2025-10-19 14:10:56 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:10:56 [INFO]: Database initialized successfully
+2025-10-19 14:10:56 [INFO]: Loaded existing RSA keys
+2025-10-19 14:10:56 [INFO]: KeyManager initialized successfully
+2025-10-19 14:10:56 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:10:56 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:11:00 [INFO]: ::1 - - [19/Oct/2025:12:11:00 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:11:00 [INFO]: ::1 - - [19/Oct/2025:12:11:00 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:12:11 [INFO]: ::1 - - [19/Oct/2025:12:12:11 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:12:30 [INFO]: Database initialized successfully
+2025-10-19 14:12:30 [INFO]: Loaded existing RSA keys
+2025-10-19 14:12:30 [INFO]: KeyManager initialized successfully
+2025-10-19 14:12:30 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:12:30 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:12:30 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:13:20 [INFO]: Loaded existing RSA keys
+2025-10-19 14:13:20 [INFO]: KeyManager initialized successfully
+2025-10-19 14:13:33 [INFO]: Protobuf definitions loaded successfully
+2025-10-19 14:13:33 [INFO]: Database initialized successfully
+2025-10-19 14:13:33 [INFO]: Loaded existing RSA keys
+2025-10-19 14:13:33 [INFO]: KeyManager initialized successfully
+2025-10-19 14:13:33 [INFO]: CryptoUtils initialized successfully
+2025-10-19 14:13:33 [INFO]: Server running on http://localhost:3000
+2025-10-19 14:13:35 [INFO]: ::1 - - [19/Oct/2025:12:13:35 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:35 [INFO]: ::1 - - [19/Oct/2025:12:13:35 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:37 [INFO]: ::1 - - [19/Oct/2025:12:13:37 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 200 295 "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:37 [INFO]: ::1 - - [19/Oct/2025:12:13:37 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:38 [INFO]: ::1 - - [19/Oct/2025:12:13:38 +0000] "GET /api/users/chart?days=7 HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:38 [INFO]: ::1 - - [19/Oct/2025:12:13:38 +0000] "GET /api/users/stats HTTP/1.1" 304 - "http://localhost:8000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:49 [INFO]: ::1 - - [19/Oct/2025:12:13:49 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:13:49 [INFO]: ::1 - - [19/Oct/2025:12:13:49 +0000] "GET /api/users/export HTTP/1.1" 200 - "http://localhost:8000/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+2025-10-19 14:14:11 [INFO]: Received shutdown signal, closing server gracefully...

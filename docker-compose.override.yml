@@ -1,0 +1,20 @@
+# Development override for docker-compose.yml
+# This file is automatically loaded by docker-compose for development
+
+version: '3.8'
+
+services:
+  backend:
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+    volumes:
+      - backend_data:/app/data
+      - backend_logs:/app/logs
+    command: npm start
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: npm start

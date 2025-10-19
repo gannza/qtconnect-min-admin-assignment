@@ -1,0 +1,30 @@
+# Node modules installed inside container
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Local database
+data/*.sqlite
+data/*.sqlite3
+data/*.db
+
+# Environment files
+.env.local
+.env.development
+.env.test
+
+# Build/test artifacts
+coverage
+dist
+build
+*.log
+
+# System/IDE files
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# Git
+.git
+.gitignore

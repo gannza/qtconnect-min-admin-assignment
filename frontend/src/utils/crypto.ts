@@ -316,51 +316,12 @@ export const verifyRSASignature = async (
   publicKeyPem: string
 ): Promise<boolean> => {
   try {
-    // Check if Web Crypto API is available
-    if (!crypto || !crypto.subtle) {
-      console.warn('Web Crypto API not available, falling back to simplified verification');
-      return verifyRSASignatureFallback(email, signature, publicKeyPem);
-    }
-
-    // Clean the PEM format and convert to ArrayBuffer
-    const cleanKey = publicKeyPem
-      .replace(/-----BEGIN PUBLIC KEY-----/g, '')
-      .replace(/-----END PUBLIC KEY-----/g, '')
-      .replace(/\s/g, '');
-    
-    const keyBuffer = Uint8Array.from(atob(cleanKey), c => c.charCodeAt(0));
-    
-    // Import the RSA public key
-    const key = await crypto.subtle.importKey(
-      'spki',
-      keyBuffer,
-      {
-        name: 'RSASSA-PKCS1-v1_5',
-        hash: 'SHA-384'
-      },
-      false,
-      ['verify']
-    );
-    
-    // Hash the email
-    const emailHash = await crypto.subtle.digest('SHA-384', new TextEncoder().encode(email));
-    
-    // Convert signature from base64 to ArrayBuffer
-    const signatureBuffer = Uint8Array.from(atob(signature), c => c.charCodeAt(0));
-    
-    // Verify signature
-    const isValid = await crypto.subtle.verify(
-      'RSASSA-PKCS1-v1_5',
-      key,
-      signatureBuffer,
-      emailHash
-    );
-    
-    return isValid;
+    // Use node-forge fallback for proper RSA-SHA384 compatibility with backend
+    //Using node-forge RSA verification (matching backend RSA-SHA384)
+    return verifyRSASignatureFallback(email, signature, publicKeyPem);
   } catch (error) {
     console.error('RSA signature verification failed:', error);
-    // Fallback to simplified verification
-    return verifyRSASignatureFallback(email, signature, publicKeyPem);
+    return false;
   }
 };
 
@@ -373,27 +334,28 @@ export const verifyRSASignatureFallback = (
   publicKeyPem: string
 ): boolean => {
   try {
-    console.log('Using node-forge RSA verification (matching backend)');
+
+  //Using node-forge RSA verification (matching backend RSA-SHA384)
     
     // Import the public key
     const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
     
     // Convert signature from base64 to bytes
     const signatureBytes = forge.util.decode64(signature);
-    console.log('Signature decoded successfully, bytes length:', signatureBytes.length);
+    //'Signature decoded successfully, bytes length:', signatureBytes.length
     
-    let isValid = false;
-   
-      try {
-        // Verify against email hash
-        const emailHash = generateSHA384Hash(email);
-        const verifier = forge.md.sha384.create();
-        verifier.update(emailHash, 'utf8');
-        isValid = publicKey.verify(verifier.digest().bytes(), signatureBytes);
-      } catch (e) {
-        console.log('Method 2 failed:', (e as Error).message);
-      }
+    // Hash the email (matching backend approach)
+    const emailHash = generateSHA384Hash(email);
+    // console.log('Email hash generated:', emailHash);
     
+    // Create verifier and update with the email hash (matching backend RSA-SHA384)
+    const verifier = forge.md.sha384.create();
+    verifier.update(emailHash, 'utf8');
+    const hashBytes = verifier.digest().bytes();
+    
+    // Verify signature against the email hash
+    const isValid = publicKey.verify(hashBytes, signatureBytes);
+    // console.log('RSA verification result:', isValid);
     
     return isValid;
 
