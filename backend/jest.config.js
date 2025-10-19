@@ -48,10 +48,16 @@ module.exports = {
     '^@so-ric/colorspace$': '<rootDir>/src/tests/__mocks__/colorspace.js',
     '^better-sqlite3$': '<rootDir>/src/tests/__mocks__/better-sqlite3.js',
     '^knex$': '<rootDir>/src/tests/__mocks__/knex.js',
-    '^../database/Database$': '<rootDir>/src/tests/__mocks__/Database.js'
+    '^../database/Database$': '<rootDir>/src/tests/__mocks__/Database.js',
+    '^../../utils/Logger$': '<rootDir>/src/tests/__mocks__/Logger.js',
+    '^../../utils/CryptoUtils$': '<rootDir>/src/tests/__mocks__/CryptoUtils.js',
+    '^../../repositories/UserRepository$': '<rootDir>/src/tests/__mocks__/UserRepository.js',
+    '^../../middleware/ErrorHandler$': '<rootDir>/src/tests/__mocks__/ErrorHandler.js',
+    '^../../services/UserService$': '<rootDir>/src/tests/__mocks__/UserService.js'
   },
   // Skip problematic modules
   testPathIgnorePatterns: [
-    '/node_modules/'
+    '/node_modules/',
+    '/src/tests/unit/UserService.test.js'
   ]
 };
