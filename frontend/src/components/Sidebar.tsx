@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navigation = [

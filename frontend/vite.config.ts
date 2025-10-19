@@ -6,6 +6,11 @@ import path from 'path'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   
+  // Determine backend URL based on environment
+  const backendUrl = mode === 'production' 
+    ? 'http://backend:3000'  // Docker service name for production
+    : process.env.VITE_API_BASE_URL || 'http://localhost:3000' // Local development
+  
   return {
     plugins: [react()],
     define: {
@@ -21,7 +26,7 @@ export default defineConfig(({ mode }) => {
       port: 8000,
       proxy: {
         '/api': {
-          target: 'http://localhost:9090',
+          target: backendUrl,
           changeOrigin: true,
           secure: false,
         }

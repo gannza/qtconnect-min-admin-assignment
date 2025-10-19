@@ -37,7 +37,7 @@ export const initializeCryptoKeys = (): CryptoKeys => {
       cryptoKeys = parsedKeys;
       // Initialize ECDSA with stored keys
       ecdsa = new EC('secp256k1');
-      return cryptoKeys;
+      return cryptoKeys!;
     }
 
     // Initialize ECDSA with secp256k1 curve (same as backend)
@@ -107,7 +107,7 @@ export const signWithECDSA = (data: string): SignatureData => {
       hashAlgorithm: 'SHA-384'
     };
   } catch (error) {
-    throw new Error(`ECDSA signing failed: ${error.message}`);
+    throw new Error(`ECDSA signing failed: ${error instanceof Error ? error.message : String(error)}`);
   }
 };
 
@@ -145,9 +145,8 @@ export const verifyECDSASignature = (
 
     const hash = CryptoJS.SHA384(data).toString(CryptoJS.enc.Hex);
     const keyPair = ecdsa.keyFromPublic(publicKey, 'hex');
-    const sigObj = ecdsa.signatureFromDER(signature);
-    
-    return keyPair.verify(hash, sigObj);
+    // Verify with signature buffer directly (DER format)
+    return keyPair.verify(hash, signature);
   } catch (error) {
     console.error('ECDSA verification error:', error);
     return false;
@@ -168,9 +167,8 @@ export const verifySignature = (
     }
 
     const keyPair = ecdsa.keyFromPublic(publicKey, 'hex');
-    const sigObj = ecdsa.signatureFromDER(signature);
-    
-    return keyPair.verify(hash, sigObj);
+    // Verify with signature buffer directly (DER format)
+    return keyPair.verify(hash, signature);
   } catch (error) {
     console.error('Failed to verify signature:', error);
     return false;
@@ -202,7 +200,7 @@ export const signUserEmail = (email: string) => {
       timestamp: new Date().toISOString()
     };
   } catch (error) {
-    throw new Error(`User email signing failed: ${error.message}`);
+    throw new Error(`User email signing failed: ${error instanceof Error ? error.message : String(error)}`);
   }
 };
 
@@ -232,7 +230,7 @@ export const verifyUserEmailSignature = (email: string, signatureData: any) => {
     return {
       email,
       valid: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       timestamp: new Date().toISOString()
     };
   }
