@@ -17,7 +17,6 @@ services:
       - RATE_LIMIT_WINDOW_MS=900000
       - RATE_LIMIT_MAX_REQUESTS=1000
       - LOG_LEVEL=info
-      - METRICS_ENABLED=true
     volumes:
       - backend_data:/usr/src/app/data
       - backend_logs:/usr/src/app/logs

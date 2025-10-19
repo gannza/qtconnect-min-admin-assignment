@@ -39,7 +39,6 @@ A Node.js backend application built with Express, SQLite, and advanced cryptogra
    RATE_LIMIT_WINDOW_MS=900000
    RATE_LIMIT_MAX_REQUESTS=1000
    LOG_LEVEL=info
-   METRICS_ENABLED=true
    ```
 
 4. **Database Setup**
@@ -141,7 +140,7 @@ backend/
 | `RATE_LIMIT_WINDOW_MS` | Rate limit window (ms) | `900000` (15 min) |
 | `RATE_LIMIT_MAX_REQUESTS` | Max requests per window | `1000` |
 | `LOG_LEVEL` | Logging level | `info` |
-| `METRICS_ENABLED` | Enable metrics | `true` |
+
 
 ## Database Management
 
