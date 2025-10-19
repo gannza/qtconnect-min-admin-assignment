@@ -44,6 +44,10 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.38.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.0.0",

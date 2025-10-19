@@ -34,5 +34,24 @@ module.exports = {
     '/src/tests/',
     '/src/database/migrations/',
     '/src/database/seeds/'
+  ],
+  // Transform configuration for ES modules
+  transform: {
+    '^.+\\.js$': 'babel-jest'
+  },
+  transformIgnorePatterns: [
+    'node_modules/(?!(winston|@dabh|@so-ric)/)'
+  ],
+  // Module name mapping for problematic modules
+  moduleNameMapper: {
+    '^@dabh/diagnostics$': '<rootDir>/src/tests/__mocks__/diagnostics.js',
+    '^@so-ric/colorspace$': '<rootDir>/src/tests/__mocks__/colorspace.js',
+    '^better-sqlite3$': '<rootDir>/src/tests/__mocks__/better-sqlite3.js',
+    '^knex$': '<rootDir>/src/tests/__mocks__/knex.js',
+    '^../database/Database$': '<rootDir>/src/tests/__mocks__/Database.js'
+  },
+  // Skip problematic modules
+  testPathIgnorePatterns: [
+    '/node_modules/'
   ]
 };

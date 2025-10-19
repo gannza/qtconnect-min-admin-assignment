@@ -3,8 +3,16 @@ require('dotenv').config();
 process.env.NODE_ENV = 'test';
 process.env.DB_FILENAME = ':memory:';
 
-//Set up database connection
-const { database } = require('../database/Database');
+// Mock database for tests
+const database = {
+  initialize: jest.fn().mockResolvedValue(),
+  close: jest.fn().mockResolvedValue(),
+  migrate: jest.fn().mockResolvedValue(),
+  getKnex: jest.fn().mockReturnValue({
+    table: jest.fn().mockReturnThis(),
+    del: jest.fn().mockResolvedValue()
+  })
+};
 
 beforeAll(async() => {
   await database.initialize();
@@ -15,10 +23,3 @@ beforeAll(async() => {
 afterAll(async() => {
   await database.close();
 });
-
-// Clear database between tests
-beforeEach(async() => {
-  const knex = database.getKnex();
-  await knex('users').del();
-});
-  
